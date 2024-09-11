@@ -4,6 +4,7 @@ class Circulo:
     #Método constructor
     def __init__(self, radio):
         self.radio = radio
+        print("Radios: ", self.radio)
     
     def calcular_area(self):
         self.area = round(pow(self.radio, 2) * 3.1416, 3)
