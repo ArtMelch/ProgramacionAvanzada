@@ -1,5 +1,7 @@
+from empleados.utils.roles import Rol
 from zoologico.zoologico import Zoologico
-
+from empleados.empleado import Empleado
+from datetime import datetime
 
 class Menu:
     zoo = Zoologico()
@@ -35,10 +37,10 @@ class Menu:
         while opcion != 7:
             menu = """
                 ZOOLÓGICO
-                1.
-                2.
-                3.
-                4.
+                1. Registrar empleado
+                2. Registrar animal
+                3. Registrar visitante
+                4. Registrar visita
                 5.
                 6.
                 7. Salir
@@ -46,10 +48,31 @@ class Menu:
             print(menu)
             opcion = int(input("Escoge una acción: "))
             if opcion == 1:
-                pass
+                print("\nSelecionaste: Registrar empleado\n")
+                
+                id = self.zoo.generar_id()
+                print("ID: ", id)
+                nombre = input("Nombre del empleado: ")
+                apellidos = input("Apellidos: ")
+                ano_ingreso = input("Año de ingreso: ")
+                mes_ingreso = input("Mes de ingreso: ")
+                dia_ingreso = input("Día de ingreso: ")
+                salario = float(input("Ingresa el salario: "))
+                rfc = input("Ingrese RFC: ")
+                curp = input("Ingrese la CURP: ")
+                horario = input("Ingrese el horario del empleado: ")
+                ano_nacimiento = int(input("Año de nacimiento: "))
+                mes_nacimiento = int(input("Mes de nacimiento: "))
+                dia_nacimiento = int(input("Día de nacimiento: "))
+                
+                fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
+                fecha_ingreso = datetime(ano_ingreso, mes_ingreso, dia_ingreso)
+                
+                empleado = Empleado(nombre=nombre, apellidos=apellidos, fecha_nacimiento=fecha_nacimiento, fecha_ingreso=fecha_ingreso, rfc=rfc, curp=curp, salario=salario, horario=horario)
+                self.zoo.registrar_empleado(empleado = empleado)
             
             elif opcion == 2:
-                pass
+                
             
             elif opcion == 3:
                 pass

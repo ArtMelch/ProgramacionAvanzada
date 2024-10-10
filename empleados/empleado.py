@@ -3,6 +3,7 @@ from empleados.utils.roles import Rol
 
 
 class Empleado:
+    id = str
     nombre: str
     apellidos: str
     fecha_nacimiento: datetime
