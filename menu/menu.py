@@ -72,7 +72,7 @@ class Menu:
                 self.zoo.registrar_empleado(empleado = empleado)
             
             elif opcion == 2:
-                
+                pass
             
             elif opcion == 3:
                 pass
