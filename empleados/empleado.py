@@ -13,7 +13,7 @@ class Empleado:
     horario: datetime
     rol: Rol 
     
-    def _init_(self, 
+    def __init__(self, 
                  nombre: str, apellidos: str, fecha_nacimiento: datetime, fecha_ingreso: datetime,
                  rfc: str, curp: str, salario: float, horario: datetime, rol: Rol):
         
