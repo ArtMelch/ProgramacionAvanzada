@@ -54,4 +54,17 @@ class Zoologico:
         opcion = int(input("Rol del empleado: "))
         
         if opcion == 1:
-            id = f"GI{letras_nombre}{aleatorio}{ano_nacimiento}{dia}"
+            id = f"GI{letras_nombre}{aleatorio}{ano_nacimiento}{dia}{longitud_mas_uno}"
+            return id
+        
+        elif opcion == 2:
+            id = f"VE{letras_nombre}{aleatorio}{ano_nacimiento}{dia}{longitud_mas_uno}"
+            return id
+        
+        elif opcion == 3:
+            id = f"MA{letras_nombre}{aleatorio}{ano_nacimiento}{dia}{longitud_mas_uno}"
+            return id
+        
+        elif opcion == 4:
+            id = f"AD{letras_nombre}{aleatorio}{ano_nacimiento}{dia}{longitud_mas_uno}"
+            return id

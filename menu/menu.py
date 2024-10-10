@@ -50,7 +50,6 @@ class Menu:
             if opcion == 1:
                 print("\nSelecionaste: Registrar empleado\n")
                 
-                id = self.zoo.generar_id()
                 print("ID: ", id)
                 nombre = input("Nombre del empleado: ")
                 apellidos = input("Apellidos: ")
@@ -68,11 +67,12 @@ class Menu:
                 fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
                 fecha_ingreso = datetime(ano_ingreso, mes_ingreso, dia_ingreso)
                 
-                empleado = Empleado(nombre=nombre, apellidos=apellidos, fecha_nacimiento=fecha_nacimiento, fecha_ingreso=fecha_ingreso, rfc=rfc, curp=curp, salario=salario, horario=horario)
+                id = self.zoo.generar_id()
+                empleado = Empleado(nombre=nombre, apellidos=apellidos, fecha_nacimiento=fecha_nacimiento, fecha_ingreso=fecha_ingreso, rfc=rfc, curp=curp, salario=salario, horario=horario, id=id)
                 self.zoo.registrar_empleado(empleado = empleado)
             
             elif opcion == 2:
-                pass
+                print("\nSeleccionaste: Registrar animal\n")
             
             elif opcion == 3:
                 pass
