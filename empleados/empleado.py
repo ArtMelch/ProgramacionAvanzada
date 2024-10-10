@@ -1,7 +1,7 @@
 from datetime import datetime
 from .utils.roles import Rol
 
-class Usuario:
+class Empleado:
     nombre: str
     apellidos: str
     fecha_nacimiento: datetime
