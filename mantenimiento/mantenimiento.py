@@ -1,12 +1,13 @@
-from empleados.empleado import Empleado
 from empleados.utils.roles import Rol
+from empleados.empleado import Empleado
 from datetime import datetime
 
-class Guia(Empleado):
-    # rol:Rol
-    
-    def __init__(self, id: str, nombre: str, apellidos: str, fecha_nacimiento: datetime, fecha_ingreso: datetime, rfc: str, curp: str,
-                 salario: float, horario: datetime, rol: Rol): #rol debe de ir incluido en la clase guia o no (porque en usuario ya esta el atributo rol)
+class Mantenimiento(Empleado):
+    pass
+
+    def __init__(self, 
+                 id: str,nombre: str, apellidos: str, fecha_nacimiento: datetime, fecha_ingreso: datetime,
+                 rfc: str, curp: str, salario: float, horario: datetime):
         super().__init__(id=id,
                          nombre=nombre,
                          apellidos=apellidos,
@@ -16,4 +17,7 @@ class Guia(Empleado):
                          curp=curp,
                          salario=salario,
                          horario=horario,
-                         rol=rol)
+                         rol=Rol.MANTENIMIENTO)
+        
+    def cuidado_animales(self):
+        pass

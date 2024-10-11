@@ -1,25 +1,26 @@
 from datetime import datetime
+from empleados.utils.roles import Rol
 
 class Animal:
     id: str
-    tipo_animal: str        #consultar (no str)
+    tipo_animal: Rol       #consultar (no str) CAMBIADO
     fecha_nacimiento: datetime
     fecha_llegada_zoo: datetime
     peso: float
     enfermedades: str
     frecuencia_alimentacion: str
-    tipo_alimentacion: str      #consultar (no str)
+    tipo_alimentacion: Rol      #consultar (no str) CAMBIADO
     vacunas: bool
     #cambiar tipo de dato en tipo_animal y tipo_alimentación dentro de constructor
     def _init_(self,
                  id: str,
-                 tipo_animal: str,
+                 tipo_animal: Rol,
                  fecha_nacimiento: datetime,
                  fecha_llegada_zoo: datetime,
                  peso: float,
                  enfermedades: str,
                  frecuencia_alimentacion: str,
-                 tipo_alimentacion: str,
+                 tipo_alimentacion: Rol,
                  vacunas: bool):
         
         self.tipo_animal = tipo_animal
