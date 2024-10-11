@@ -21,7 +21,7 @@ class Animal:
                  frecuencia_alimentacion: str,
                  tipo_alimentacion: str,
                  vacunas: bool):
-        
+        self.id = id
         self.tipo_animal = tipo_animal
         self.fecha_nacimiento = fecha_nacimiento
         self.fecha_llegada_zoo= fecha_llegada_zoo

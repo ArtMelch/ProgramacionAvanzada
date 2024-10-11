@@ -33,7 +33,7 @@ class Zoologico:
         
     #! GENERAR ID'S
     
-    def generar_id(self, nombre, ano_nacimiento):
+    def generar_id_empleados(self, nombre, ano_nacimiento):
         ano_nacimiento = ano_nacimiento
         dia = datetime.now().day
         aleatorio = randint(100,1000)
@@ -68,3 +68,11 @@ class Zoologico:
         elif opcion == 4:
             id = f"AD{letras_nombre}{aleatorio}{ano_nacimiento}{dia}{longitud_mas_uno}"
             return id
+    
+    def generar_id_animal(self, tipo_animal, ano_llegada, ano_nacimiento):
+        # Primeras dos letras del tipo de animal-dia de ingreso-año ingreso-año-nacimiento-numero de ingreso más 1
+        tipo_animal = tipo_animal[:2]
+        longitud_mas_uno = len(self.lista_animales) + 1
+        
+        id = f"{tipo_animal}-{ano_llegada}{ano_nacimiento}{longitud_mas_uno}"
+        return id
