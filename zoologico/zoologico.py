@@ -76,3 +76,17 @@ class Zoologico:
         
         id = f"{tipo_animal}-{ano_llegada}{ano_nacimiento}{longitud_mas_uno}"
         return id
+    
+    def generar_id_visitante(self, ano_nacimiento):
+        longitud_mas_uno = len(self.lista_visitantes) +1
+        numero_random = randint(10,100)
+        
+        id = f"VISITANTE{ano_nacimiento}{numero_random}{longitud_mas_uno}"
+        return id
+    
+    def generar_id_visita(self):
+        numero_random = randint(100,1000)
+        longitud_mas_uno = len(self.lista_visitas) + 1
+        
+        id = f"VISITA{numero_random}{longitud_mas_uno}"
+        return id
