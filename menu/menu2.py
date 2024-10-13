@@ -192,7 +192,9 @@ class Menu:
                     opcion_eliminar = int(input("Ingresa una opción para continuar"))
                     
                     if opcion_eliminar == 1:
-                        pass
+                        print("Seleccionaste: Eliminar empleado\n")
+                        id = input("Ingresa el ID del empleado a eliminar: ")
+                        self.zoo.eliminar_empleado(id = id)
                     
                     elif opcion_eliminar == 2:
                         pass

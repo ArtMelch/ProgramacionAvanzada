@@ -90,3 +90,13 @@ class Zoologico:
         
         id = f"VISITA{numero_random}{longitud_mas_uno}"
         return id
+    
+    #! ELIMINAR
+    
+    def eliminar_empleado(self, id:str):
+        for empleado in self.lista_empleados:
+            if empleado.id == id:
+                self.lista_empleados.remove(empleado)
+                print("Empleado eliminado")
+                return
+        print(f"\n\tNo se encontró al empleado con el ID: {id}")
