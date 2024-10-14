@@ -22,6 +22,16 @@ class Empleado:
         self.fecha_nacimiento = fecha_nacimiento
         self.fecha_ingreso = fecha_ingreso
         self.rfc = rfc
-        self.salario = curp
+        self.curp = curp
         self.salario = salario
+<<<<<<< HEAD
         self.horario = horario
+=======
+        self.horario = horario
+        self.rol = rol
+        
+    def mostrar_info_empl(self):
+        nombre_completo = f"{self.nombre}{self.apellidos}"
+        info = f"ID: {self.id} \nNombre completo: {nombre_completo} \nCURP: {self.curp} \nFecha de nacimiento: {self.fecha_nacimiento} \nRFC: {self.rfc} \nSalario: {self.salario} \nHorario: {self.horario} \nFecha de ingreso: {self.fecha_ingreso} \nRol: {self.rol.value}"
+        return info
+>>>>>>> a11872fe5db6df45e64c989bf0df10404f018f8c

@@ -10,6 +10,10 @@ from visitas.visitas import Visita
 
 class Zoologico:
     lista_empleados: List [Empleado] = []
+    lista_guia : List [Empleado] = []
+    lista_veterinario : List [Empleado] = []
+    lista_mantenimiento : List [Empleado] = []
+    lista_administrativo : List [Empleado] = []
     lista_visitantes: List [Visitante] = []
     lista_animales: List [Animal] = []
     lista_visitas: List [Visita] = []
@@ -20,8 +24,21 @@ class Zoologico:
     
     #! REGISTRAR
     
-    def registrar_empleado(self, empleado: Empleado):
+    def registrar_empleado(self, empleado: Empleado, id: str):
         self.lista_empleados.append(empleado)
+        letras_id = id[:2]
+        if letras_id == "GI":
+            self.lista_guia.append(empleado)
+        
+        elif letras_id == "VE":
+            self.lista_veterinario.append(empleado)
+            
+        elif letras_id == "MA":
+            self.lista_mantenimiento.append(empleado)
+        
+        elif letras_id == "AD":
+            self.lista_administrativo.append(empleado)
+
     
     def registrar_visitante(self, visitante: Visitante):
         self.lista_visitantes.append(visitante)
@@ -101,5 +118,66 @@ class Zoologico:
                 print("Empleado eliminado")
                 return
         print(f"\n\tNo se encontró al empleado con el ID: {id}")
+<<<<<<< HEAD
         
+=======
+    
+    def eliminar_animal(self, id: str):
+        for animal in self.lista_animales:
+            if animal.id == id:
+                self.lista_animales.remove(animal)
+                print("\n\tAnimal extinguido")
+                return
+        print(f"\n\tNo hay animal con el id: {id}")
+    
+    def eliminar_visita(self, id: str):
+        for visita in self.lista_visitas:
+            if visita.id == id:
+                self.lista_visitas.remove(visita)
+                print("\n\tSe eliminó la visita")
+                return
+        print(f"\n\tNo se encontro la visita con el id: {id}")
+        
+    #! LISTAR
+    
+    def listar_empleados(self):
+        print("\n--------------EMPLEADOS-------------\n")
+        for empleado in self.lista_empleados:
+            print(empleado.mostrar_info_empl())
+            
+    def listar_veterinarios(self):
+        print("\n--------------VETERINARIOS-------------\n")
+        for empleado in self.lista_veterinario:
+            print(empleado.mostrar_info_empl())
+            
+    def listar_guias(self):
+        print("\n--------------GUÍAS-------------\n")
+        for empleado in self.lista_guia:
+            print(empleado.mostrar_info_empl())
+            
+    def listar_mantenimiento(self):
+        print("\n--------------MANTENIMIENTO-------------\n")
+        for empleado in self.lista_mantenimiento:
+            print(empleado.mostrar_info_empl())
+            
+    def listar_administrativos(self):
+        print("\n--------------VETERINARIOS-------------\n")
+        for empleado in self.lista_administrativo:
+            print(empleado.mostrar_info_empl())
+            
+    def listar_animales(self):
+        print("\n-------------ANIMALES---------------\n")
+        for animal in self.lista_animales:
+            print(animal.mostar_info_animal())
+            
+    def listar_visitas(self):
+        print("\n-------------VISITAS-------------\n")
+        for visita in self.lista_visitas:
+            print(visita.mostrar_info_visitas())
+    
+    def listar_visitantes(self):
+        print("\n----------VISITANTES-----------\n")
+        for visitante in self.lista_visitantes:
+            print(visitante.mostrar_info_visitante())
+>>>>>>> a11872fe5db6df45e64c989bf0df10404f018f8c
     
