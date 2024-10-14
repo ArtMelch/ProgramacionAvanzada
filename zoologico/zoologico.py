@@ -7,6 +7,7 @@ from animal.animal import Animal
 from visitas.visitas import Visita
 
 
+
 class Zoologico:
     lista_empleados: List [Empleado] = []
     lista_visitantes: List [Visitante] = []
@@ -71,10 +72,10 @@ class Zoologico:
     
     def generar_id_animal(self, tipo_animal, ano_llegada, ano_nacimiento):
         # Primeras dos letras del tipo de animal-dia de ingreso-año ingreso-año-nacimiento-numero de ingreso más 1
-        tipo_animal = tipo_animal[:2]
+        dos_letras = tipo_animal.value[:2].upper()
         longitud_mas_uno = len(self.lista_animales) + 1
         
-        id = f"{tipo_animal}-{ano_llegada}{ano_nacimiento}{longitud_mas_uno}"
+        id = f"{dos_letras}-{ano_llegada}{ano_nacimiento}{longitud_mas_uno}"
         return id
     
     def generar_id_visitante(self, ano_nacimiento):
@@ -100,3 +101,5 @@ class Zoologico:
                 print("Empleado eliminado")
                 return
         print(f"\n\tNo se encontró al empleado con el ID: {id}")
+        
+    

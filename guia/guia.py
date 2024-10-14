@@ -6,7 +6,7 @@ class Guia(Empleado):
     # rol:Rol
     
     def __init__(self, id: str, nombre: str, apellidos: str, fecha_nacimiento: datetime, fecha_ingreso: datetime, rfc: str, curp: str,
-                 salario: float, horario: datetime, rol: Rol): #rol debe de ir incluido en la clase guia o no (porque en usuario ya esta el atributo rol)
+                 salario: float, horario: datetime, rol: Rol.GUIA): #rol debe de ir incluido en la clase guia o no (porque en usuario ya esta el atributo rol)
         super().__init__(id=id,
                          nombre=nombre,
                          apellidos=apellidos,

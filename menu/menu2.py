@@ -1,4 +1,6 @@
 from empleados.utils.roles import Rol
+from empleados.utils.roles import Tipo_Animal
+from empleados.utils.roles import Alimentacion
 from zoologico.zoologico import Zoologico
 from empleados.empleado import Empleado
 from animal.animal import Animal
@@ -90,8 +92,8 @@ class Menu:
                 
                     elif opcion_registro == 2:
                         print("\nSeleccionaste: Registrar animal\n")
-
-                        tipo_animal = input("") #tipo de animal No sé que poner #!PENDIENTE
+                        
+                        tipo_animal = Tipo_Animal.validar_animal()
                         ano_nacimiento = int(input("Año de nacimiento: "))
                         mes_nacimiento = int(input("Mes de nacimiento: "))
                         dia_nacimiento = int(input("Día de nacimiento: "))
@@ -105,7 +107,7 @@ class Menu:
                         peso = float(input("Peso del animal: "))
                         enfermedades = input("Enfermedades del animal: ")
                         frecuencia_alimentacion = input("Fecuencia de alimentación al día: ")
-                        tipo_alimentacion = input("Dieta del animal: ")
+                        tipo_alimentacion = Alimentacion.validar_tipo_alimentacion()
                         vacunas = bool(input("Cuenta con vacunas 1. Sí / 0. No: "))
                         
                         id = self.zoo.generar_id_animal(tipo_animal=tipo_animal, ano_llegada=ano_llegada, ano_nacimiento=ano_nacimiento)
@@ -138,7 +140,7 @@ class Menu:
                         print("Seleccionaste: Registrar visita")
                     #! FALTA ASIGNAR AL GUIA Y METER A LOS VISITANTES
                         id = self.zoo.generar_id_visita()
-                        visita = Visita(id, guia, visitantes)
+                        visita = Visita(id, empleado, visitante)
                         self.zoo.registrar_visita(visita = visita)
                         
                     elif opcion_registro == 5:

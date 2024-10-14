@@ -12,11 +12,9 @@ class Empleado:
     curp: str
     salario: float
     horario: datetime
-    rol: Rol 
+     
     
-    def __init__(self, 
-                 id: str,nombre: str, apellidos: str, fecha_nacimiento: datetime, fecha_ingreso: datetime,
-                 rfc: str, curp: str, salario: float, horario: datetime, rol: Rol):
+    def __init__(self, id: str,nombre: str, apellidos: str, fecha_nacimiento: datetime, fecha_ingreso: datetime,rfc: str, curp: str, salario: float, horario: datetime):
         
         self.id = id
         self.nombre = nombre
@@ -27,4 +25,3 @@ class Empleado:
         self.salario = curp
         self.salario = salario
         self.horario = horario
-        self.rol = rol
