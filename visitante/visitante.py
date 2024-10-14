@@ -20,4 +20,7 @@ class Visitante:
         self.numero_visitas = numero_visitas
         self.fecha_registro = fecha_registro
         self.rol = Rol.VISITANTE
-        
+    
+    def mostrar_info_visitante(self):
+        nombre_completo = f"{self.nombre} {self.apellidos}"
+        info = f"ID: {self.id_visitante} \nNombre: {nombre_completo} \nCURP: {self.curp} \nFecha de nacimiento: {self.fecha_nacimiento} \nFecha de registro: {self.fecha_registro} \nNúmero de visitas: {self.numero_visitas}"

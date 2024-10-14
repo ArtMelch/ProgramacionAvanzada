@@ -86,7 +86,7 @@ class Menu:
                         print("ID: ", id)
 
                         empleado = Empleado(nombre=nombre, apellidos=apellidos, fecha_nacimiento=fecha_nacimiento, fecha_ingreso=fecha_ingreso, rfc=rfc, curp=curp, salario=salario, horario=horario, id=id)
-                        self.zoo.registrar_empleado(empleado = empleado)
+                        self.zoo.registrar_empleado(empleado = empleado, id = id)
                 
                     elif opcion_registro == 2:
                         print("\nSeleccionaste: Registrar animal\n")
@@ -197,13 +197,18 @@ class Menu:
                         self.zoo.eliminar_empleado(id = id)
                     
                     elif opcion_eliminar == 2:
-                        pass
+                        print("Seleccionaste: Eliminar animal")
+                        id = input("Ingresa el ID del animal a eliminar: ")
+                        self.zoo.eliminar_animal(id = id)
                     
                     elif opcion_eliminar == 3:
-                        pass
+                        print("Seleccionaste: Eliminar visita")
+                        id = input("Ingresa el ID de la visita a eliminar: ")
+                        self.zoo.eliminar_visita(id = id)
                     
                     elif opcion_eliminar == 4:
                         break
+                    
                     else: 
                         print("\t_////// Esa nos es una opción válida \\\\\\\_\n")
                 
@@ -211,7 +216,7 @@ class Menu:
                 print("Seleccionaste: Consultar\n")
                 while True:
                     menu_consultar = """
-        1. Personas veterinario
+        1. Personal veterinario
         2. Personal mantenimiento
         3. Personal guías
         4. Personal administrativo
@@ -225,24 +230,29 @@ class Menu:
                     opcion_consultar = int(input("Ingrese una opción para continuar: "))
                     
                     if opcion_consultar == 1:
-                        pass
-                    
+                        self.zoo.listar_veterinarios()
+                        
                     elif opcion_consultar == 2:
-                        pass
+                        self.zoo.listar_mantenimiento()
                     
                     elif opcion_consultar == 3:
-                        pass
+                        self.zoo.listar_guias()
                     
                     elif opcion_consultar == 4:
-                        pass
+                        self.zoo.listar_administrativos()
+                        
                     elif opcion_consultar == 5:
-                        pass
+                        self.zoo.listar_animales()
+
                     elif opcion_consultar == 6:
-                        pass
+                        self.zoo.listar_visitantes()
+
                     elif opcion_consultar == 7:
-                        pass
+                        self.zoo.listar_visitas()
+
                     elif opcion_consultar == 8:
                         break
+                    
                     else: 
                         print("\t_////// Esa nos es una opción válida \\\\\\\_\n")
             

@@ -12,4 +12,6 @@ class Visita:
         self.visitantes = visitantes
         self.guia = guia
         
-    
+    def mostrar_info_visitas(self):
+        info = f"ID: {self.id} \nGuía encargado: {self.guia} \nVisitantes: {self.visitantes}"
+        return info
