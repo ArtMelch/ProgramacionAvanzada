@@ -10,7 +10,7 @@ from datetime import datetime
 
 
 class Menu:
-    zoo = Zoologico()
+    zoo: Zoologico = Zoologico()
     
     def login(self):
         intentos = 0
@@ -107,7 +107,7 @@ class Menu:
                         
                         peso = float(input("Peso del animal: "))
                         enfermedades = input("Enfermedades del animal: ")
-                        frecuencia_alimentacion = input("Fecuencia de alimentación al día: ")
+                        frecuencia_alimentacion = input("Frecuencia de alimentación al día: ")
                         tipo_alimentacion = Alimentacion.validar_tipo_alimentacion()
                         vacunas = bool(input("Cuenta con vacunas 1. Sí / 0. No: "))
                         
