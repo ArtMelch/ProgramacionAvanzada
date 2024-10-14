@@ -8,8 +8,9 @@ from visitante.visitante import Visitante
 from visitas.visitas import Visita
 from datetime import datetime
 
+
 class Menu:
-    zoo = Zoologico()
+    zoo: Zoologico = Zoologico()
     
     def login(self):
         intentos = 0
@@ -18,13 +19,13 @@ class Menu:
             print("\n------BIENVENIDO AL SISTEMA DEL ZOOLÓGICO------\n")
             print("Inicia sesión para continuar: ")
             
-            username = input("Ingresa el nombre de usuario: ")
+            id = input("Ingresa el ID de usuario: ")
             contrasena = input("Ingresa la contraseña: ")
             
-            usuario = self.zoo.validad_inicio_sesion(username=username, contrasena=contrasena) #Falta hacer el método
+            usuario = self.zoo.validar_inicio_sesion(id=id, contrasena=contrasena) #Falta hacer el método
             
             if usuario is None:
-                intentos = self.mostrar_intentos_sesion_fallido(intentos_usuario=intentos) #Falta hacer el método
+                intentos = self.mostrar_intentos_sesion_fallidos(intentos_usuario=intentos) #Falta hacer el método
             
             else: 
                 self.mostrar_menu()
@@ -106,7 +107,7 @@ class Menu:
                         
                         peso = float(input("Peso del animal: "))
                         enfermedades = input("Enfermedades del animal: ")
-                        frecuencia_alimentacion = input("Fecuencia de alimentación al día: ")
+                        frecuencia_alimentacion = input("Frecuencia de alimentación al día: ")
                         tipo_alimentacion = Alimentacion.validar_tipo_alimentacion()
                         vacunas = bool(input("Cuenta con vacunas 1. Sí / 0. No: "))
                         
