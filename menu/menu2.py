@@ -84,10 +84,10 @@ class Menu:
                         fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
                         fecha_ingreso = datetime(ano_ingreso, mes_ingreso, dia_ingreso)
                         
-                        id = self.zoo.generar_id_empleados(nombre=nombre, ano_nacimiento=ano_nacimiento)
+                        id, rol = self.zoo.generar_id_empleados(nombre=nombre, ano_nacimiento=ano_nacimiento)
                         print("ID: ", id)
 
-                        empleado = Empleado(nombre=nombre, apellidos=apellidos, fecha_nacimiento=fecha_nacimiento, fecha_ingreso=fecha_ingreso, rfc=rfc, curp=curp, salario=salario, horario=horario, id=id)
+                        empleado = Empleado(nombre=nombre, apellidos=apellidos, fecha_nacimiento=fecha_nacimiento, fecha_ingreso=fecha_ingreso, rfc=rfc, curp=curp, salario=salario, horario=horario, id=id, rol=rol)
                         self.zoo.registrar_empleado(empleado = empleado, id = id)
                 
                     elif opcion_registro == 2:
@@ -121,19 +121,19 @@ class Menu:
                         
                         nombre = input("Nombre: ")
                         apellidos = input("Apellidos")
-                        ano_nacimiento = input("Año de nacimiento: ")
-                        mes_nacimiento = input("Mes de nacimiento: ")
-                        dia_nacimiento = input("Día de nacimiento: ")
+                        ano_nacimiento = int(input("Año de nacimiento: "))
+                        mes_nacimiento = int(input("Mes de nacimiento: "))
+                        dia_nacimiento = int(input("Día de nacimiento: "))
                         fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
                         
-                        # numero_visitas = 0
+                        #!numero_visitas += 1
                         curp = input("CURP: ")
                         ano = datetime.now().year
                         mes = datetime.now().month
                         dia = datetime.now().day
                         fecha_registro = datetime(ano, mes, dia)
                         id = self.zoo.generar_id_visitante(ano_nacimiento)
-                        visitante = Visitante(id_visitante=id, nombre=nombre, apellidos=apellidos, fecha_nacimiento=fecha_nacimiento, curp=curp, fecha_registro=fecha_registro, rol=Rol)
+                        visitante = Visitante(id_visitante=id, nombre=nombre, apellidos=apellidos, fecha_nacimiento=fecha_nacimiento,numero_visitas=0, curp=curp, fecha_registro=fecha_registro, rol=Rol)
                         self.zoo.registrar_visitante(visitante = visitante)
                     
                     elif opcion_registro == 4:

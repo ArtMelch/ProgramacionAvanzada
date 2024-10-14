@@ -29,6 +29,7 @@ class Rol(Enum):#empleados
     GUIA = "Guia"
     VETERINARIO = "Veterinario"
     MANTENIMIENTO = "Mantenimiento"
+    ADMINISTRATIVO = "Administrativo"
     
     #visitantes
     VISITANTE = "Visitante"

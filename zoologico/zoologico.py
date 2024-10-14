@@ -5,6 +5,7 @@ from empleados.empleado import Empleado
 from visitante.visitante import Visitante
 from animal.animal import Animal
 from visitas.visitas import Visita
+from empleados.utils.roles import Rol
 
 
 
@@ -72,20 +73,25 @@ class Zoologico:
         opcion = int(input("Rol del empleado: "))
         
         if opcion == 1:
+            rol=Rol.GUIA
             id = f"GI{letras_nombre}{aleatorio}{ano_nacimiento}{dia}{longitud_mas_uno}"
-            return id
+            
+            return id, rol
         
         elif opcion == 2:
+            rol=Rol.VETERINARIO
             id = f"VE{letras_nombre}{aleatorio}{ano_nacimiento}{dia}{longitud_mas_uno}"
-            return id
+            return id, rol
         
         elif opcion == 3:
+            rol=Rol.MANTENIMIENTO
             id = f"MA{letras_nombre}{aleatorio}{ano_nacimiento}{dia}{longitud_mas_uno}"
-            return id
+            return id, rol
         
         elif opcion == 4:
+            rol=Rol.ADMINISTRATIVO
             id = f"AD{letras_nombre}{aleatorio}{ano_nacimiento}{dia}{longitud_mas_uno}"
-            return id
+            return id, rol
     
     def generar_id_animal(self, tipo_animal, ano_llegada, ano_nacimiento):
         # Primeras dos letras del tipo de animal-dia de ingreso-año ingreso-año-nacimiento-numero de ingreso más 1
