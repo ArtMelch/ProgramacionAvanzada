@@ -8,6 +8,7 @@ from visitante.visitante import Visitante
 from visitas.visitas import Visita
 from datetime import datetime
 
+
 class Menu:
     zoo = Zoologico()
     
@@ -18,13 +19,13 @@ class Menu:
             print("\n------BIENVENIDO AL SISTEMA DEL ZOOLÓGICO------\n")
             print("Inicia sesión para continuar: ")
             
-            username = input("Ingresa el nombre de usuario: ")
+            id = input("Ingresa el ID de usuario: ")
             contrasena = input("Ingresa la contraseña: ")
             
-            usuario = self.zoo.validad_inicio_sesion(username=username, contrasena=contrasena) #Falta hacer el método
+            usuario = self.zoo.validar_inicio_sesion(id=id, contrasena=contrasena) #Falta hacer el método
             
             if usuario is None:
-                intentos = self.mostrar_intentos_sesion_fallido(intentos_usuario=intentos) #Falta hacer el método
+                intentos = self.mostrar_intentos_sesion_fallidos(intentos_usuario=intentos) #Falta hacer el método
             
             else: 
                 self.mostrar_menu()

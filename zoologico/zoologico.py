@@ -5,7 +5,7 @@ from empleados.empleado import Empleado
 from visitante.visitante import Visitante
 from animal.animal import Animal
 from visitas.visitas import Visita
-
+from director.director import Director
 
 
 class Zoologico:
@@ -18,8 +18,11 @@ class Zoologico:
     lista_animales: List [Animal] = []
     lista_visitas: List [Visita] = []
     
+    
     def __init__(self):
-        pass
+        director = Director(id="12345", nombre="Berta", apellidos= "Valencia", fecha_nacimiento= "12/05/10", fecha_ingreso= "03/06/24", rfc= "MRG09I09", curp= "BEMNL98987", salario= 10000, horario= "9-16", contrasena="321")
+        self.lista_empleados.append(director)
+        
     
     
     #! REGISTRAR
@@ -177,3 +180,13 @@ class Zoologico:
         for visitante in self.lista_visitantes:
             print(visitante.mostrar_info_visitante())
     
+    #! VALIDAR INICIO DE SESIÓN
+    
+    def validar_inicio_sesion(self, id: str, contrasena: str):
+        for director in self.lista_empleados:
+            if director.id == id:
+                if director.contrasena == contrasena:
+                    return director
+                
+        return None
+                

@@ -23,11 +23,7 @@ class Animal:
         self.frecuencia_alimentacion= frecuencia_alimentacion
         self.tipo_alimentacion= tipo_alimentacion
         self.vacunas= vacunas
-<<<<<<< HEAD
-        
-=======
-    
+            
     def mostar_info_animal(self):
         info = f"ID: {self.id} \nTipo de animal: {self.tipo_animal} \nFecha de nacimiento: {self.fecha_nacimiento} \nFecha de llegada: {self.fecha_llegada_zoo} \nPeso: {self.peso} \nTipo de alimentacion: {self.tipo_alimentacion} \nFrecuencia de alimentación: {self.frecuencia_alimentacion} \nEnfermedades: {self.enfermedades} \nVacunas: {self.vacunas}"
         return info
->>>>>>> a11872fe5db6df45e64c989bf0df10404f018f8c
