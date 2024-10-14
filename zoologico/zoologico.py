@@ -118,9 +118,6 @@ class Zoologico:
                 print("Empleado eliminado")
                 return
         print(f"\n\tNo se encontró al empleado con el ID: {id}")
-<<<<<<< HEAD
-        
-=======
     
     def eliminar_animal(self, id: str):
         for animal in self.lista_animales:
@@ -179,5 +176,4 @@ class Zoologico:
         print("\n----------VISITANTES-----------\n")
         for visitante in self.lista_visitantes:
             print(visitante.mostrar_info_visitante())
->>>>>>> a11872fe5db6df45e64c989bf0df10404f018f8c
     

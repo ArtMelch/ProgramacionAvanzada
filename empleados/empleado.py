@@ -14,7 +14,7 @@ class Empleado:
     horario: datetime
      
     
-    def __init__(self, id: str,nombre: str, apellidos: str, fecha_nacimiento: datetime, fecha_ingreso: datetime,rfc: str, curp: str, salario: float, horario: datetime):
+    def __init__(self, id: str,nombre: str, apellidos: str, fecha_nacimiento: datetime, fecha_ingreso: datetime,rfc: str, curp: str, salario: float, horario: datetime, rol: Rol):
         
         self.id = id
         self.nombre = nombre
@@ -24,9 +24,6 @@ class Empleado:
         self.rfc = rfc
         self.curp = curp
         self.salario = salario
-<<<<<<< HEAD
-        self.horario = horario
-=======
         self.horario = horario
         self.rol = rol
         
@@ -34,4 +31,3 @@ class Empleado:
         nombre_completo = f"{self.nombre}{self.apellidos}"
         info = f"ID: {self.id} \nNombre completo: {nombre_completo} \nCURP: {self.curp} \nFecha de nacimiento: {self.fecha_nacimiento} \nRFC: {self.rfc} \nSalario: {self.salario} \nHorario: {self.horario} \nFecha de ingreso: {self.fecha_ingreso} \nRol: {self.rol.value}"
         return info
->>>>>>> a11872fe5db6df45e64c989bf0df10404f018f8c
