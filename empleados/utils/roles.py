@@ -2,9 +2,9 @@ from enum import Enum
 
 class Tipo_Animal(Enum):
     #tipo de animal
-    ACUATICO = "Acuático"
+    ACUATICO = "Acuatico"
     TERRESTRE = "Terrestre"
-    AEREO = "Aéreo"
+    AEREO = "Aereo"
     def validar_animal():
          while True:
             tipo_input = input("Tipo de animal (Acuatico, Aereo, Terrestre): ").capitalize()

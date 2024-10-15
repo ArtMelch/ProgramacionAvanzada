@@ -100,10 +100,16 @@ class Menu:
                         dia_nacimiento = int(input("Día de nacimiento: "))
                         fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
                         
-                        ano_llegada = int(input("Año de ingreso: "))
-                        mes_llegada = int(input("Mes de ingreso: "))
-                        dia_llegada = int(input("Día de ingreso: "))
-                        fecha_llegada_zoo = datetime(ano_llegada, mes_llegada, dia_llegada)
+                        while True:
+                            ano_llegada = int(input("Año de ingreso: "))
+                            mes_llegada = int(input("Mes de ingreso: "))
+                            dia_llegada = int(input("Día de ingreso: "))
+                            fecha_llegada_zoo = datetime(ano_llegada, mes_llegada, dia_llegada)
+                            
+                            if fecha_llegada_zoo >= fecha_nacimiento:
+                                break
+                            else:
+                                print("Fecha de llegada no válida, esta debe ser posterior a la fecha de nacimiento. Intentalo nuevamente.\n")
                         
                         peso = float(input("Peso del animal: "))
                         enfermedades = input("Enfermedades del animal: ")
