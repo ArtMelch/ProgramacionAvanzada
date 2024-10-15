@@ -134,15 +134,50 @@ class Menu:
                         dia = datetime.now().day
                         fecha_registro = datetime(ano, mes, dia)
                         id = self.zoo.generar_id_visitante(ano_nacimiento)
-                        visitante = Visitante(id_visitante=id, nombre=nombre, apellidos=apellidos, fecha_nacimiento=fecha_nacimiento,numero_visitas=0, curp=curp, fecha_registro=fecha_registro, rol=Rol)
+                        visitante = Visitante(id_visitante=id, nombre=nombre, apellidos=apellidos, fecha_nacimiento=fecha_nacimiento,numero_visitas=0, curp=curp, fecha_registro=fecha_registro)
                         self.zoo.registrar_visitante(visitante = visitante)
                     
                     elif opcion_registro == 4:
                         print("Seleccionaste: Registrar visita")
-                    #! FALTA ASIGNAR AL GUIA Y METER A LOS VISITANTES
                         id = self.zoo.generar_id_visita()
-                        visita = Visita(id, empleado, visitante)
+                        print("\nlista de empleados disponibles como Guía:")
+                        guia_seleccionado = None
+                        while not guia_seleccionado:
+                            
+                            for guia in Zoologico.lista_guia:
+                                print(f"ID: {guia.id}, Nombre: {guia.nombre} {guia.apellidos}")
+                                
+                            seleccion = input("selecciona el guía por ID: ")
+                            for guia in Zoologico.lista_guia:
+                                if seleccion == guia.id:
+                                    guia_seleccionado= guia
+                                    break
+                            if not guia_seleccionado:
+                                print("ID de guia no valido, intenta nuevamente.")
+                                    
+                        
+                        while True:
+                            print("\nLista de visitantes registrados: ")
+                            for visitante in Zoologico.lista_visitantes:
+                                print(f"ID: {visitante.id_visitante}, Nombre: {visitante.nombre} {visitante.apellidos}")
+                                
+                            seleccion = input("selecciona el visitante por ID: ")
+                            visitante_seleccionado = None
+                            for visitante in Zoologico.lista_visitantes:
+                                if seleccion == visitante.id_visitante:
+                                    visitante_seleccionado= visitante
+                                    Visita.visitantes.append(visitante_seleccionado)
+                                    break
+                            if not visitante_seleccionado:
+                                print("ID no valido, intenta nuevamente.")
+                            else:
+                                agregar_otro=input("Desea agregar a otro vicitante (s/n): ").lower()
+                                if agregar_otro != "s":
+                                    break
+                                       
+                        visita = Visita(id=id, guia=guia_seleccionado, visitantes=Visita.visitantes)
                         self.zoo.registrar_visita(visita = visita)
+                        print(f"Visita registrada con exito. ID: {id}")
                         
                     elif opcion_registro == 5:
                         break
