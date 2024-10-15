@@ -124,6 +124,23 @@ class Zoologico:
         for empleado in self.lista_empleados:
             if empleado.id == id:
                 self.lista_empleados.remove(empleado)
+                id_eliminar = id[:2]
+                
+                if id_eliminar == "VE":
+                    self.lista_veterinario.remove(empleado)
+                    
+                elif id_eliminar == "MA":
+                    self.lista_mantenimiento.remove(empleado)
+                
+                elif id_eliminar == "AD":
+                    self.lista_administrativo.remove(empleado)
+                
+                elif id_eliminar == "GI":
+                    self.lista_guia.remove(empleado)
+                
+                else:
+                    print("ANONIMUS FATAL ERROR ")
+                    
                 print("Empleado eliminado")
                 return
         print(f"\n\tNo se encontró al empleado con el ID: {id}")
@@ -195,4 +212,3 @@ class Zoologico:
                     return director
                 
         return None
-                

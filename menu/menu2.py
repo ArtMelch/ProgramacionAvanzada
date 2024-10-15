@@ -192,7 +192,7 @@ class Menu:
         
                 """
                     print(menu_eliminar)
-                    opcion_eliminar = int(input("Ingresa una opción para continuar"))
+                    opcion_eliminar = int(input("Ingresa una opción para continuar: "))
                     
                     if opcion_eliminar == 1:
                         print("Seleccionaste: Eliminar empleado\n")
@@ -219,41 +219,45 @@ class Menu:
                 print("Seleccionaste: Consultar\n")
                 while True:
                     menu_consultar = """
-        1. Personal veterinario
-        2. Personal mantenimiento
-        3. Personal guías
-        4. Personal administrativo
-        5. Animales
-        6. Visitantes
-        7. Visitas
-        8. Salir
+        1. Empleados
+        2. Personal veterinario
+        3. Personal mantenimiento
+        4. Personal guías
+        5. Personal administrativo
+        6. Animales
+        7. Visitantes
+        8. Visitas
+        9. Salir
 
                 """
                     print(menu_consultar)
                     opcion_consultar = int(input("Ingrese una opción para continuar: "))
                     
                     if opcion_consultar == 1:
-                        self.zoo.listar_veterinarios()
+                        self.zoo.listar_empleados()
                         
                     elif opcion_consultar == 2:
+                        self.zoo.listar_veterinarios()
+                        
+                    elif opcion_consultar == 3:
                         self.zoo.listar_mantenimiento()
                     
-                    elif opcion_consultar == 3:
+                    elif opcion_consultar == 4:
                         self.zoo.listar_guias()
                     
-                    elif opcion_consultar == 4:
+                    elif opcion_consultar == 5:
                         self.zoo.listar_administrativos()
                         
-                    elif opcion_consultar == 5:
+                    elif opcion_consultar == 6:
                         self.zoo.listar_animales()
 
-                    elif opcion_consultar == 6:
+                    elif opcion_consultar == 7:
                         self.zoo.listar_visitantes()
 
-                    elif opcion_consultar == 7:
+                    elif opcion_consultar == 8:
                         self.zoo.listar_visitas()
 
-                    elif opcion_consultar == 8:
+                    elif opcion_consultar == 9:
                         break
                     
                     else: 
