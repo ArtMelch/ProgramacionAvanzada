@@ -223,3 +223,10 @@ class Zoologico:
                     return director
                 
         return None
+    
+    #! MODIFICAR
+    
+    def cambiar_nombre(self, nuevo_nombre: str):
+        for empleado in self.lista_empleados:
+            empleado.nombre = nuevo_nombre
+            print(self.mostrar_info_empl())

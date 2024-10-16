@@ -53,21 +53,21 @@ class Menu:
             opcion = int(input("Ingresa una opción para continuar: "))
             
             if opcion == 1:
-                print("\n*Seleccionaste: Registrar*")
+                print("\nSeleccionaste: Registrar")
                 while True:
                     menu_registro = """
-        1. Registrar empleado
-        2. Registrar animal
-        3. Registrar visitantes
-        4. Registrar visita
-        5. Salir
+    1. Registrar empleado
+    2. Registrar animal
+    3. Registrar visitantes
+    4. Registrar visita
+    5. Salir
             """
                     print(menu_registro)
                 
                     opcion_registro = int(input("Ingresa una opción para continuar: "))
                     
                     if opcion_registro == 1:
-                        print("\nSelecionaste: Registrar empleado\n")
+                        print("\nSeleccionaste: Registrar empleado\n")
                     
                         nombre = input("Nombre del empleado: ")
                         apellidos = input("Apellidos: ")
@@ -140,6 +140,7 @@ class Menu:
                         dia = datetime.now().day
                         fecha_registro = datetime(ano, mes, dia)
                         id = self.zoo.generar_id_visitante(ano_nacimiento)
+                        print("ID: ", id)
                         visitante = Visitante(id_visitante=id, nombre=nombre, apellidos=apellidos, fecha_nacimiento=fecha_nacimiento,numero_visitas=0, curp=curp, fecha_registro=fecha_registro)
                         self.zoo.registrar_visitante(visitante = visitante)
                     
@@ -199,29 +200,204 @@ class Menu:
                         print("\t_////// Esa nos es una opción válida \\\\\\\_\n")
             
             elif opcion == 2:
-                print("\n*Seleccionaste: Modificar\n*")
+                print("\nSeleccionaste: Modificar\n")
                 while True:
                     menu_modificar = """
-        1. Modificar empleado
-        2. Modificar animal
-        3. Modificar visitantes
-        4. Modificar visita
-        5. Salir
-        """
+    1. Modificar empleado
+    2. Modificar animal
+    3. Modificar visitante
+    4. Salir
+    """
                     print(menu_modificar)
                 
                     opcion_modificar = int(input("Ingresa una opción para continuar: "))
                     
                     if opcion_modificar == 1:
-                        pass
+                        id_empleado_modificar = input("ID del empleado: ")
+                        for empleado in Zoologico.lista_empleados:
+                            if id_empleado_modificar == empleado.id:
+                                while True:
+                                    menu = """
+    MENÚ MODIFICACIONES
+    
+    1. Nombre
+    2. Apellidos
+    3. Fecha de nacimiento
+    4. Fecha de ingreso
+    5. RFC
+    6. CURP
+    7. Salario
+    8. Horario
+    9. Salir
+                            
+                            """
+                                    print(menu)
+                                    opcion_cambiar = int(input("Dato a modificar: "))
+                                    
+                                    if opcion_cambiar == 1:
+                                        nuevo_nombre = input("Ingrese el nuevo nombre: ")
+                                        empleado.nombre = nuevo_nombre
+                                    
+                                    elif opcion_cambiar == 2:
+                                        nuevo_apellido = input("Ingresa los nuevos apellidos: ")
+                                        empleado.apellidos = nuevo_apellido
+
+                                    elif opcion_cambiar == 3:
+                                        nuevo_ano = int(input("Ingresar nuevo año de nacimiento : ")) 
+                                        nuevo_mes = int(input("Ingresar nuevo mes de nacimiento : ")) 
+                                        nuevo_dia = int(input("Ingresar nuevo dia de nacimiento : "))
+                                        nueva_fecha_nacimiento = datetime(nuevo_ano,nuevo_mes,nuevo_dia)
+                                        empleado.fecha_nacimiento = nueva_fecha_nacimiento
+
+                                    elif opcion_cambiar == 4:
+                                        nuevo_ano = int(input("Ingresar nuevo año de ingreso : ")) 
+                                        nuevo_mes = int(input("Ingresar nuevo mes de ingreso : ")) 
+                                        nuevo_dia = int(input("Ingresar nuevo dia de ingreso : "))
+                                        nueva_fecha_ingreso = datetime(nuevo_ano,nuevo_mes,nuevo_dia)
+                                        empleado.fecha_ingreso = nueva_fecha_ingreso
+
+                                    elif opcion_cambiar == 5:
+                                        nuevo_rfc = input("Ingresa el nuevo RFC: ")
+                                        empleado.rfc = nuevo_rfc
+
+                                    elif opcion_cambiar == 6:
+                                        nuevo_curp = input("Ingresa el nuevo CURP: ")
+                                        empleado.curp = nuevo_curp
+
+                                    elif opcion_cambiar == 7:
+                                        nuevo_salario = float(input("Ingresa el nuevo salario: "))
+                                        empleado.salario = nuevo_salario
+
+                                    elif opcion_cambiar == 8:
+                                        nuevo_horario = input("Ingrese el nuevo horario: ")
+                                        empleado.horario = nuevo_horario
+
+                                    elif opcion_cambiar == 9:
+                                        break
+                                        
+                                    else:
+                                        print("\t_////// Esa nos es una opción válida \\\\\\\_\n")
+                                        
+                        if not id_empleado_modificar:        
+                            print("No se encontro un empleado con el ID: ", id_empleado_modificar)
+                                
+                    
                     elif opcion_modificar == 2:
-                        pass
+                        id_animal_modificar = input("ID del animal: ")
+                        for animal in Zoologico.lista_animales:
+                            if id_animal_modificar == animal.id:
+                                while True:
+                                    menu = """
+    MENÚ MODIFICACIONES
+    
+    1. Fecha de nacimiento
+    2. Fecha de llegada
+    3. Peso
+    4. Enfermedades
+    5. Frecuancia de alimentación
+    6. Vacunas
+    7. Salir
+                            
+                            """
+                                    print(menu)
+                                    opcion_cambiar = int(input("Dato a modificar: "))
+                                    
+                                    if opcion_cambiar == 1:
+                                        nuevo_ano = int(input("Ingresar nuevo año de nacimiento : ")) 
+                                        nuevo_mes = int(input("Ingresar nuevo mes de nacimiento : ")) 
+                                        nuevo_dia = int(input("Ingresar nuevo dia de nacimiento : "))
+                                        nueva_fecha_nacimiento = datetime(nuevo_ano,nuevo_mes,nuevo_dia)
+                                        animal.fecha_nacimiento = nueva_fecha_nacimiento
+                                    
+                                    elif opcion_cambiar == 2:
+                                        nuevo_ano = int(input("Ingresar nuevo año de llegada : ")) 
+                                        nuevo_mes = int(input("Ingresar nuevo mes de llegada : ")) 
+                                        nuevo_dia = int(input("Ingresar nuevo dia de llegada : "))
+                                        nueva_fecha_llegada_zoo = datetime(nuevo_ano,nuevo_mes,nuevo_dia)
+                                        animal.fecha_llegada_zoo = nueva_fecha_llegada_zoo
+
+                                    elif opcion_cambiar == 3:
+                                        nuevo_peso = float(input("Ingrese el nuevo peso: "))
+                                        animal.peso = nuevo_peso
+
+                                    elif opcion_cambiar == 4:
+                                        nuevas_enfermedades = input("Ingrese las nuevas enfermedades: ")
+                                        animal.enfermedades = nuevas_enfermedades
+
+                                    elif opcion_cambiar == 5:
+                                        nueva_frecuencia_alimentacion = input("Ingrese la nueva frecuencia de alimentación: ")
+                                        animal.frecuencia_alimentacion = nueva_frecuencia_alimentacion
+
+                                    elif opcion_cambiar == 6:
+                                        nuevas_vacunas = bool(input("Cuenta con vacunas 1. Sí / 0. No: "))
+                                        animal.vacunas = nuevas_vacunas
+
+                                    elif opcion_cambiar == 7:
+                                        break
+                                        
+                                    else:
+                                        print("\t_////// Esa nos es una opción válida \\\\\\\_\n")
+                                        
+                        if not id_animal_modificar:        
+                            print("No se encontro un animal con el ID: ", id_animal_modificar)
+                    
                     elif opcion_modificar == 3:
-                        pass
+                        id_visitante_modificar = input("ID del visitante: ")
+                        for visitante in Zoologico.lista_visitantes:
+                            if id_visitante_modificar == visitante.id_visitante:
+                                while True:
+                                    menu = """
+    MENÚ MODIFICACIONES
+    
+    1. Nombre
+    2. Apellidos
+    3. Fecha de nacimiento
+    4. Fecha de ingreso
+    5. CURP
+    6. Salir
+                            
+                            """
+                                    print(menu)
+                                    opcion_cambiar = int(input("Dato a modificar: "))
+                                    
+                                    if opcion_cambiar == 1:
+                                        nuevo_nombre = input("Ingrese el nuevo nombre: ")
+                                        visitante.nombre = nuevo_nombre
+                                    
+                                    elif opcion_cambiar == 2:
+                                        nuevo_apellido = input("Ingresa los nuevos apellidos: ")
+                                        visitante.apellidos = nuevo_apellido
+
+                                    elif opcion_cambiar == 3:
+                                        nuevo_ano = int(input("Ingresar nuevo año de nacimiento : ")) 
+                                        nuevo_mes = int(input("Ingresar nuevo mes de nacimiento : ")) 
+                                        nuevo_dia = int(input("Ingresar nuevo dia de nacimiento : "))
+                                        nueva_fecha_nacimiento = datetime(nuevo_ano,nuevo_mes,nuevo_dia)
+                                        visitante.fecha_nacimiento = nueva_fecha_nacimiento
+
+                                    elif opcion_cambiar == 4:
+                                        nuevo_ano = int(input("Ingresar nuevo año de ingreso : ")) 
+                                        nuevo_mes = int(input("Ingresar nuevo mes de ingreso : ")) 
+                                        nuevo_dia = int(input("Ingresar nuevo dia de ingreso : "))
+                                        nueva_fecha_ingreso = datetime(nuevo_ano,nuevo_mes,nuevo_dia)
+                                        visitante.fecha_registro = nueva_fecha_ingreso
+
+                                    elif opcion_cambiar == 5:
+                                        nuevo_curp = input("Ingresa el nuevo CURP: ")
+                                        visitante.curp = nuevo_curp
+
+                                    elif opcion_cambiar == 6:
+                                        break
+                                        
+                                    else:
+                                        print("\t_////// Esa nos es una opción válida \\\\\\\_\n")
+                                        
+                        if not id_visitante_modificar:        
+                            print("No se encontro un visitante con el ID: ", id_visitante_modificar)
+                                
+                    
                     elif opcion_modificar == 4:
-                        pass
-                    elif opcion_modificar == 5:
-                        pass
+                        break
                     
                     else:
                         print("\t_////// Esa nos es una opción válida \\\\\\\_\n")
@@ -233,10 +409,10 @@ class Menu:
                 print("Seleccionaste: Eliminar\n")
                 while True:
                     menu_eliminar = """
-        1. Eliminar empleado
-        2. Eliminar animal
-        3. Eliminar visita
-        4. Salir
+    1. Eliminar empleado
+    2. Eliminar animal
+    3. Eliminar visita
+    4. Salir
         
                 """
                     print(menu_eliminar)
@@ -267,15 +443,15 @@ class Menu:
                 print("Seleccionaste: Consultar\n")
                 while True:
                     menu_consultar = """
-        1. Empleados
-        2. Personal veterinario
-        3. Personal mantenimiento
-        4. Personal guías
-        5. Personal administrativo
-        6. Animales
-        7. Visitantes
-        8. Visitas
-        9. Salir
+    1. Empleados
+    2. Personal veterinario
+    3. Personal mantenimiento
+    4. Personal guías
+    5. Personal administrativo
+    6. Animales
+    7. Visitantes
+    8. Visitas
+    9. Salir
 
                 """
                     print(menu_consultar)
