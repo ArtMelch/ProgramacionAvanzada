@@ -38,9 +38,9 @@ class Menu:
         return intentos_usuario + 1
     
     def mostrar_menu(self):
-        print("_______ M E N Ú ________")
         while True:
             menu = """
+    _______ M E N Ú ________
     1. Registro
     2. Modificar
     3. Asignar mantenimientos
@@ -56,9 +56,10 @@ class Menu:
                 print("\nSeleccionaste: Registrar")
                 while True:
                     menu_registro = """
+    MENÚ REGISTRAR
     1. Registrar empleado
     2. Registrar animal
-    3. Registrar visitantes
+    3. Registrar visitante
     4. Registrar visita
     5. Salir
             """
@@ -75,8 +76,8 @@ class Menu:
                         mes_nacimiento = int(input("Mes de nacimiento: "))
                         dia_nacimiento = int(input("Día de nacimiento: "))
                         salario = float(input("Ingresa el salario: "))
-                        rfc = input("Ingrese RFC: ")
-                        curp = input("Ingrese la CURP: ")
+                        rfc = input("Ingrese RFC: ").upper()
+                        curp = input("Ingrese la CURP: ").upper()
                         horario = input("Ingrese el horario del empleado: ")
                         while True:
                             ano_ingreso = int(input("Año de ingreso: "))
@@ -140,7 +141,7 @@ class Menu:
                         fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
                         
                         #!numero_visitas += 1
-                        curp = input("CURP: ")
+                        curp = input("CURP: ").upper()
                         ano = datetime.now().year
                         mes = datetime.now().month
                         dia = datetime.now().day
@@ -212,6 +213,7 @@ class Menu:
                 print("\nSeleccionaste: Modificar\n")
                 while True:
                     menu_modificar = """
+    MENÚ MODIFICACIONES
     1. Modificar empleado
     2. Modificar animal
     3. Modificar visitante
@@ -228,7 +230,6 @@ class Menu:
                                 while True:
                                     menu = """
     MENÚ MODIFICACIONES
-    
     1. Nombre
     2. Apellidos
     3. Fecha de nacimiento
@@ -266,11 +267,11 @@ class Menu:
                                         empleado.fecha_ingreso = nueva_fecha_ingreso
 
                                     elif opcion_cambiar == 5:
-                                        nuevo_rfc = input("Ingresa el nuevo RFC: ")
+                                        nuevo_rfc = input("Ingresa el nuevo RFC: ").upper()
                                         empleado.rfc = nuevo_rfc
 
                                     elif opcion_cambiar == 6:
-                                        nuevo_curp = input("Ingresa el nuevo CURP: ")
+                                        nuevo_curp = input("Ingresa el nuevo CURP: ").upper()
                                         empleado.curp = nuevo_curp
 
                                     elif opcion_cambiar == 7:
@@ -298,7 +299,6 @@ class Menu:
                                 while True:
                                     menu = """
     MENÚ MODIFICACIONES
-    
     1. Fecha de nacimiento
     2. Fecha de llegada
     3. Peso
@@ -357,7 +357,6 @@ class Menu:
                                 while True:
                                     menu = """
     MENÚ MODIFICACIONES
-    
     1. Nombre
     2. Apellidos
     3. Fecha de nacimiento
@@ -392,7 +391,7 @@ class Menu:
                                         visitante.fecha_registro = nueva_fecha_ingreso
 
                                     elif opcion_cambiar == 5:
-                                        nuevo_curp = input("Ingresa el nuevo CURP: ")
+                                        nuevo_curp = input("Ingresa el nuevo CURP: ").upper()
                                         visitante.curp = nuevo_curp
 
                                     elif opcion_cambiar == 6:
@@ -468,9 +467,10 @@ class Menu:
                 print("Seleccionaste: Eliminar\n")
                 while True:
                     menu_eliminar = """
+    MENÚ ELIMINAR
     1. Eliminar empleado
     2. Eliminar animal
-    3. Eliminar visita
+    3. Eliminar visitante
     4. Salir
         
                 """
@@ -488,9 +488,9 @@ class Menu:
                         self.zoo.eliminar_animal(id = id)
                     
                     elif opcion_eliminar == 3:
-                        print("Seleccionaste: Eliminar visita")
-                        id = input("Ingresa el ID de la visita a eliminar: ")
-                        self.zoo.eliminar_visita(id = id)
+                        print("Seleccionaste: Eliminar visitante")
+                        id = input("Ingresa el ID del visitante a eliminar: ")
+                        self.zoo.eliminar_visitante(id = id)
                     
                     elif opcion_eliminar == 4:
                         break

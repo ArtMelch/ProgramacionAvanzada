@@ -167,13 +167,13 @@ class Zoologico:
                 return
         print(f"\n\tNo hay animal con el id: {id}")
     
-    def eliminar_visita(self, id: str):
-        for visita in self.lista_visitas:
-            if visita.id == id:
-                self.lista_visitas.remove(visita)
-                print("\n\tSe eliminó la visita")
+    def eliminar_visitante(self, id: str):
+        for visitante in self.lista_visitantes:
+            if visitante.id_visitante == id:
+                self.lista_visitantes.remove(visitante)
+                print("\n\tSe eliminó al visitante")
                 return
-        print(f"\n\tNo se encontro la visita con el id: {id}")
+        print(f"\n\tNo se encontró al visitantes con el id: {id}")
         
     #! LISTAR
     
