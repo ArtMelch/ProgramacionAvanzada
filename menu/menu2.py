@@ -236,7 +236,57 @@ class Menu:
                         print("\t_////// Esa nos es una opción válida \\\\\\\_\n")
             
             elif opcion == 3:
-                pass
+                    print("Seleccionaste: Asignar mantenimientos")
+    
+                    print("\nLista de empleados disponibles para mantenimiento:")
+                    empleado_seleccionado = None
+                    while not empleado_seleccionado:
+                        for empleado in Zoologico.lista_empleados:
+                            if empleado.rol == Rol.MANTENIMIENTO:
+                                print(f"ID: {empleado.id}, Nombre: {empleado.nombre} {empleado.apellidos}")
+                        
+                        seleccion_empleado = input("Selecciona el empleado por ID: ")
+                        
+                        for empleado in Zoologico.lista_empleados:
+                            if seleccion_empleado == empleado.id and empleado.rol == Rol.MANTENIMIENTO:
+                                empleado_seleccionado = empleado
+                                break
+                        if not empleado_seleccionado:
+                            print("ID de empleado no válido o el empleado no tiene rol de Mantenimiento. Intenta nuevamente.")
+                            
+                    id_animal = input("Ingresa el ID del animal: ")
+                    
+                    # Solicitar tipo de proceso
+                    print("\nSelecciona el tipo de proceso:")
+                    print("1. Alimentación")
+                    print("2. Limpieza")
+                    print("3. Mantenimiento")
+                    tipo_proceso = input("Opción: ")
+                    
+                    if tipo_proceso == "1":
+                        proceso = "Alimentación"
+                    elif tipo_proceso == "2":
+                        proceso = "Limpieza"
+                    elif tipo_proceso == "3":
+                        proceso = "Mantenimiento"
+                    else:
+                        print("Opción no válida. Se asignará el proceso como 'Mantenimiento'.")
+                        proceso = "Mantenimiento"
+                    
+                    fecha_proceso = datetime.now().strftime("%Y-%m-%d")
+                    observaciones = input("Ingresa observaciones (opcional, presiona Enter si no hay): ")
+                    
+                    registro_proceso = {
+                        "empleado": empleado_seleccionado,
+                        "id_animal": id_animal,
+                        "proceso": proceso,
+                        "fecha_proceso": fecha_proceso,
+                        "observaciones": observaciones
+                    }
+                    
+                    Zoologico.procesos_realizados.append(registro_proceso)
+                    
+                    print(f"\nProceso de {proceso} registrado exitosamente para el animal con ID: {id_animal}.")
             
             elif opcion == 4:
                 print("Seleccionaste: Eliminar\n")
