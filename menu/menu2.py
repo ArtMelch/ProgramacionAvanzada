@@ -71,19 +71,25 @@ class Menu:
                     
                         nombre = input("Nombre del empleado: ")
                         apellidos = input("Apellidos: ")
-                        ano_ingreso = int(input("Año de ingreso: "))
-                        mes_ingreso = int(input("Mes de ingreso: "))
-                        dia_ingreso = int(input("Día de ingreso: "))
+                        ano_nacimiento = int(input("Año de nacimiento: "))
+                        mes_nacimiento = int(input("Mes de nacimiento: "))
+                        dia_nacimiento = int(input("Día de nacimiento: "))
                         salario = float(input("Ingresa el salario: "))
                         rfc = input("Ingrese RFC: ")
                         curp = input("Ingrese la CURP: ")
                         horario = input("Ingrese el horario del empleado: ")
-                        ano_nacimiento = int(input("Año de nacimiento: "))
-                        mes_nacimiento = int(input("Mes de nacimiento: "))
-                        dia_nacimiento = int(input("Día de nacimiento: "))
-                        
-                        fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
-                        fecha_ingreso = datetime(ano_ingreso, mes_ingreso, dia_ingreso)
+                        while True:
+                            ano_ingreso = int(input("Año de ingreso: "))
+                            mes_ingreso = int(input("Mes de ingreso: "))
+                            dia_ingreso = int(input("Día de ingreso: "))
+                            
+                            fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
+                            fecha_ingreso = datetime(ano_ingreso, mes_ingreso, dia_ingreso)
+                            
+                            if fecha_ingreso > fecha_nacimiento:
+                                break
+                            else:
+                                print("Fecha de ingreso no válida. Inténtalo nuevamente")
                         
                         id, rol = self.zoo.generar_id_empleados(nombre=nombre, ano_nacimiento=ano_nacimiento)
                         print("ID: ", id)
@@ -165,22 +171,25 @@ class Menu:
                                 print("ID de guia no valido, intenta nuevamente.")
                                     
                         visitantes_seleccionados = Visita.visitantes
+                        
                         while True:
                             print("\nLista de visitantes registrados: ")
                             for visitante in Zoologico.lista_visitantes:
-                                print(f"\nID: {visitante.id_visitante} \nNombre: {visitante.nombre} {visitante.apellidos}")
+                                if visitante not in Visita.visitantes:
+                                    print(f"\nID: {visitante.id_visitante} \nNombre: {visitante.nombre} {visitante.apellidos}")
                                 
                             seleccion = input("\nSelecciona el visitante por ID: ")
                             visitante_seleccionado = None
                             for visitante in Zoologico.lista_visitantes:
                                 if seleccion == visitante.id_visitante:
-                                    visitante_seleccionado= visitante
+                                    visitante_seleccionado = visitante
                                 
                                     if visitante_seleccionado == visitantes_seleccionados:
                                         print("\n\tNo se puede registrar dos veces al mismo visitante")
                                         
                                     else:
                                         visitantes_seleccionados.append(visitante_seleccionado)
+                                        visitante =+ 1
                                     break
                             if not visitante_seleccionado:
                                 print("ID no valido, intenta nuevamente.")
@@ -403,7 +412,57 @@ class Menu:
                         print("\t_////// Esa nos es una opción válida \\\\\\\_\n")
             
             elif opcion == 3:
-                pass
+                    print("Seleccionaste: Asignar mantenimientos")
+    
+                    print("\nLista de empleados disponibles para mantenimiento:")
+                    empleado_seleccionado = None
+                    while not empleado_seleccionado:
+                        for empleado in Zoologico.lista_empleados:
+                            if empleado.rol == Rol.MANTENIMIENTO:
+                                print(f"ID: {empleado.id}, Nombre: {empleado.nombre} {empleado.apellidos}")
+                        
+                        seleccion_empleado = input("Selecciona el empleado por ID: ")
+                        
+                        for empleado in Zoologico.lista_empleados:
+                            if seleccion_empleado == empleado.id and empleado.rol == Rol.MANTENIMIENTO:
+                                empleado_seleccionado = empleado
+                                break
+                        if not empleado_seleccionado:
+                            print("ID de empleado no válido o el empleado no tiene rol de Mantenimiento. Intenta nuevamente.")
+                            
+                    id_animal = input("Ingresa el ID del animal: ")
+                    
+                    # Solicitar tipo de proceso
+                    print("\nSelecciona el tipo de proceso:")
+                    print("1. Alimentación")
+                    print("2. Limpieza")
+                    print("3. Mantenimiento")
+                    tipo_proceso = input("Opción: ")
+                    
+                    if tipo_proceso == "1":
+                        proceso = "Alimentación"
+                    elif tipo_proceso == "2":
+                        proceso = "Limpieza"
+                    elif tipo_proceso == "3":
+                        proceso = "Mantenimiento"
+                    else:
+                        print("Opción no válida. Se asignará el proceso como 'Mantenimiento'.")
+                        proceso = "Mantenimiento"
+                    
+                    fecha_proceso = datetime.now().strftime("%Y-%m-%d")
+                    observaciones = input("Ingresa observaciones (opcional, presiona Enter si no hay): ")
+                    
+                    registro_proceso = {
+                        "empleado": empleado_seleccionado,
+                        "id_animal": id_animal,
+                        "proceso": proceso,
+                        "fecha_proceso": fecha_proceso,
+                        "observaciones": observaciones
+                    }
+                    
+                    Zoologico.procesos_realizados.append(registro_proceso)
+                    
+                    print(f"\nProceso de {proceso} registrado exitosamente para el animal con ID: {id_animal}.")
             
             elif opcion == 4:
                 print("Seleccionaste: Eliminar\n")
