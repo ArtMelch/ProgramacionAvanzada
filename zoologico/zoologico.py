@@ -7,6 +7,9 @@ from animal.animal import Animal
 from visitas.visitas import Visita
 from empleados.utils.roles import Rol
 from director.director import Director
+from guia.guia import Guia #! ELIMINAR ANTES DE ENTREGAR
+from visitante.visitante import Visitante #! ELIMINAR ANTES DE ENTREGAR
+from visitas.visitas import Visita #! ELIMINAR ANTES DE ENTREGAR
 
 
 class Zoologico:
@@ -22,8 +25,7 @@ class Zoologico:
     
     def __init__(self):
         director = Director(id="12345", nombre="Berta", apellidos= "Valencia", fecha_nacimiento= "12/05/10", fecha_ingreso= "03/06/24", rfc= "MRG09I09", curp= "BEMNL98987", salario= 10000, horario= "9-16", contrasena="321")
-        self.lista_empleados.append(director)
-        
+        self.lista_empleados.append(director)        
     
     
     #! REGISTRAR

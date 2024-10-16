@@ -71,19 +71,25 @@ class Menu:
                     
                         nombre = input("Nombre del empleado: ")
                         apellidos = input("Apellidos: ")
-                        ano_ingreso = int(input("Año de ingreso: "))
-                        mes_ingreso = int(input("Mes de ingreso: "))
-                        dia_ingreso = int(input("Día de ingreso: "))
+                        ano_nacimiento = int(input("Año de nacimiento: "))
+                        mes_nacimiento = int(input("Mes de nacimiento: "))
+                        dia_nacimiento = int(input("Día de nacimiento: "))
                         salario = float(input("Ingresa el salario: "))
                         rfc = input("Ingrese RFC: ")
                         curp = input("Ingrese la CURP: ")
                         horario = input("Ingrese el horario del empleado: ")
-                        ano_nacimiento = int(input("Año de nacimiento: "))
-                        mes_nacimiento = int(input("Mes de nacimiento: "))
-                        dia_nacimiento = int(input("Día de nacimiento: "))
-                        
-                        fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
-                        fecha_ingreso = datetime(ano_ingreso, mes_ingreso, dia_ingreso)
+                        while True:
+                            ano_ingreso = int(input("Año de ingreso: "))
+                            mes_ingreso = int(input("Mes de ingreso: "))
+                            dia_ingreso = int(input("Día de ingreso: "))
+                            
+                            fecha_nacimiento = datetime(ano_nacimiento, mes_nacimiento, dia_nacimiento)
+                            fecha_ingreso = datetime(ano_ingreso, mes_ingreso, dia_ingreso)
+                            
+                            if fecha_ingreso > fecha_nacimiento:
+                                break
+                            else:
+                                print("Fecha de ingreso no válida. Inténtalo nuevamente")
                         
                         id, rol = self.zoo.generar_id_empleados(nombre=nombre, ano_nacimiento=ano_nacimiento)
                         print("ID: ", id)
@@ -164,22 +170,25 @@ class Menu:
                                 print("ID de guia no valido, intenta nuevamente.")
                                     
                         visitantes_seleccionados = Visita.visitantes
+                        
                         while True:
                             print("\nLista de visitantes registrados: ")
                             for visitante in Zoologico.lista_visitantes:
-                                print(f"\nID: {visitante.id_visitante} \nNombre: {visitante.nombre} {visitante.apellidos}")
+                                if visitante not in Visita.visitantes:
+                                    print(f"\nID: {visitante.id_visitante} \nNombre: {visitante.nombre} {visitante.apellidos}")
                                 
                             seleccion = input("\nSelecciona el visitante por ID: ")
                             visitante_seleccionado = None
                             for visitante in Zoologico.lista_visitantes:
                                 if seleccion == visitante.id_visitante:
-                                    visitante_seleccionado= visitante
+                                    visitante_seleccionado = visitante
                                 
                                     if visitante_seleccionado == visitantes_seleccionados:
                                         print("\n\tNo se puede registrar dos veces al mismo visitante")
                                         
                                     else:
                                         visitantes_seleccionados.append(visitante_seleccionado)
+                                        visitante =+ 1
                                     break
                             if not visitante_seleccionado:
                                 print("ID no valido, intenta nuevamente.")
