@@ -1,11 +1,13 @@
 from typing import List
-from datetime import datetime
+from datetime import datetime, date
 from random import randint
 from empleados.empleado import Empleado
 from visitante.visitante import Visitante
 from animal.animal import Animal
 from visitas.visitas import Visita
 from empleados.utils.roles import Rol
+from empleados.utils.roles import Tipo_Animal
+from empleados.utils.roles import Alimentacion
 from director.director import Director
 
 
@@ -23,7 +25,38 @@ class Zoologico:
     
     def __init__(self):
         director = Director(id="12345", nombre="Berta", apellidos= "Valencia", fecha_nacimiento= "12/05/10", fecha_ingreso= "03/06/24", rfc= "MRG09I09", curp= "BEMNL98987", salario= 10000, horario= "9-16", contrasena="321")
-        self.lista_empleados.append(director)  
+        self.lista_empleados.append(director) 
+        #ELIMINAR
+        guia1 = Empleado(id="GI123345", nombre="Arturo", apellidos="Melchor", fecha_nacimiento=date(2000,8,9,), fecha_ingreso=date(2020,9,9), rfc="dsfsg", curp="fdsagns", salario=978465132, horario=8, rol=Rol.GUIA)
+        guia2 = Empleado(id="GI123345", nombre="Arturoo", apellidos="Melchoor", fecha_nacimiento=date(2001,8,9,), fecha_ingreso=date(2020,9,9), rfc="dsfsfadsg", curp="fdsagnadsgs", salario=97846598652, horario=8, rol=Rol.GUIA)
+        self.lista_empleados.append(guia1) 
+        self.lista_empleados.append(guia2) 
+        Zoologico.lista_guia.append(guia1)
+        Zoologico.lista_guia.append(guia2)
+        
+        animal1 = Animal(id="AE8465123", tipo_animal=Tipo_Animal.AEREO, fecha_nacimiento=(2020,5,2), fecha_llegada_zoo=(2021,12,12), peso=500, enfermedades="ninguna", frecuencia_alimentacion=3, tipo_alimentacion=Alimentacion.CARNIVORO, vacunas=True)
+        animal2 = Animal(id="TE8465123", tipo_animal=Tipo_Animal.TERRESTRE, fecha_nacimiento=(2020,5,2), fecha_llegada_zoo=(2021,12,12), peso=500, enfermedades="ninguna", frecuencia_alimentacion=3, tipo_alimentacion=Alimentacion.HERBIVORO, vacunas=True)
+        animal3 = Animal(id="AC8465123", tipo_animal=Tipo_Animal.ACUATICO, fecha_nacimiento=(2020,5,2), fecha_llegada_zoo=(2021,12,12), peso=500, enfermedades="ninguna", frecuencia_alimentacion=3, tipo_alimentacion=Alimentacion.CARNIVORO, vacunas=True)
+        self.lista_animales.append(animal1) 
+        self.lista_animales.append(animal2) 
+        self.lista_animales.append(animal3) 
+        Zoologico.lista_animales.append(animal1)
+        Zoologico.lista_animales.append(animal2)
+        Zoologico.lista_animales.append(animal3)
+        
+        visitante1 = Visitante(id_visitante="VISITANTE6458768312", nombre="joshua", apellidos="perez", fecha_nacimiento=date(2018,6,15), curp="sfdghf", fecha_registro=date(2024,5,5), numero_visitas=0)
+        visitante2 = Visitante(id_visitante="VISITANTE643435312", nombre="rodrigo", apellidos="mendez", fecha_nacimiento=date(2019,6,15), curp="sfdghf", fecha_registro=date(2024,5,5), numero_visitas=0)
+        visitante3 = Visitante(id_visitante="VISITANTE64576312", nombre="juan", apellidos="persfadz", fecha_nacimiento=date(2014,6,15), curp="sfdghf", fecha_registro=date(2024,5,5), numero_visitas=0)
+        visitante4 = Visitante(id_visitante="VISITANTE645326412", nombre="oscar", apellidos="peresfdz", fecha_nacimiento=date(2010,6,15), curp="sfdghf", fecha_registro=date(2024,5,5), numero_visitas=0)
+        # self.lista_visitantes.append(visitante1)
+        # self.lista_visitantes.append(visitante2)
+        # self.lista_visitantes.append(visitante3)
+        # self.lista_visitantes.append(visitante4)
+        Zoologico.lista_visitantes.append(visitante1)
+        Zoologico.lista_visitantes.append(visitante2)
+        Zoologico.lista_visitantes.append(visitante3)
+        Zoologico.lista_visitantes.append(visitante4)
+        #ELIMINAR
     
     #! REGISTRAR
     
