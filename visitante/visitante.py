@@ -25,7 +25,7 @@ class Visitante:
 
     def mostrar_info_visitante(self):
         nombre_completo = f"{self.nombre} {self.apellidos}"
-        info = f"ID: {self.id_visitante} \nNombre: {nombre_completo} \nCURP: {self.curp} \nFecha de nacimiento: {self.fecha_nacimiento} \nFecha de registro: {self.fecha_registro} \nNúmero de visitas: {self.numero_visitas}"
+        info = f"ID: {self.id_visitante} \nNombre: {nombre_completo} \nCURP: {self.curp} \nFecha de nacimiento: {self.fecha_nacimiento} \nFecha de registro: {self.fecha_registro} \nNúmero de visitas: {self.numero_visitas}\n"
         return info
     
     def es_adulto(self):

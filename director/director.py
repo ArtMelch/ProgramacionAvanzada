@@ -1,5 +1,4 @@
 from empleados.empleado import Empleado
-from datetime import datetime
 from empleados.utils.roles import Rol
 
 class Director(Empleado):
@@ -10,6 +9,6 @@ class Director(Empleado):
         self.contrasena = contrasena
         
     def mostrar_info_empl(self):
-        nombre_completo = f"{self.nombre}{self.apellidos}"
+        nombre_completo = f"{self.nombre} {self.apellidos}"
         info = f"ID: {self.id} \nNombre completo: {nombre_completo} \nCURP: {self.curp} \nFecha de nacimiento: {self.fecha_nacimiento} \nRFC: {self.rfc} \nSalario: {self.salario} \nHorario: {self.horario} \nFecha de ingreso: {self.fecha_ingreso} \nRol: {self.rol.value}\n"
         return info
