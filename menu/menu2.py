@@ -127,7 +127,7 @@ class Menu:
                         print("\nSeleccionaste: Registrar visitante\n")
                         
                         nombre = input("Nombre: ")
-                        apellidos = input("Apellidos")
+                        apellidos = input("Apellidos: ")
                         ano_nacimiento = int(input("Año de nacimiento: "))
                         mes_nacimiento = int(input("Mes de nacimiento: "))
                         dia_nacimiento = int(input("Día de nacimiento: "))
@@ -151,39 +151,46 @@ class Menu:
                         while not guia_seleccionado:
                             
                             for guia in Zoologico.lista_guia:
-                                print(f"ID: {guia.id}, Nombre: {guia.nombre} {guia.apellidos}")
+                                print(f"\nID: {guia.id} \nNombre: {guia.nombre} {guia.apellidos}")
                                 
-                            seleccion = input("selecciona el guía por ID: ")
+                            seleccion = input("\nSelecciona el guía por ID: ")
                             for guia in Zoologico.lista_guia:
                                 if seleccion == guia.id:
                                     guia_seleccionado= guia
                                     break
+                                
+                            
                             if not guia_seleccionado:
                                 print("ID de guia no valido, intenta nuevamente.")
                                     
-                        
+                        visitantes_seleccionados = Visita.visitantes
                         while True:
                             print("\nLista de visitantes registrados: ")
                             for visitante in Zoologico.lista_visitantes:
-                                print(f"ID: {visitante.id_visitante}, Nombre: {visitante.nombre} {visitante.apellidos}")
+                                print(f"\nID: {visitante.id_visitante} \nNombre: {visitante.nombre} {visitante.apellidos}")
                                 
-                            seleccion = input("selecciona el visitante por ID: ")
+                            seleccion = input("\nSelecciona el visitante por ID: ")
                             visitante_seleccionado = None
                             for visitante in Zoologico.lista_visitantes:
                                 if seleccion == visitante.id_visitante:
                                     visitante_seleccionado= visitante
-                                    Visita.visitantes.append(visitante_seleccionado)
+                                
+                                    if visitante_seleccionado == visitantes_seleccionados:
+                                        print("\n\tNo se puede registrar dos veces al mismo visitante")
+                                        
+                                    else:
+                                        visitantes_seleccionados.append(visitante_seleccionado)
                                     break
                             if not visitante_seleccionado:
                                 print("ID no valido, intenta nuevamente.")
                             else:
-                                agregar_otro=input("Desea agregar a otro vicitante (s/n): ").lower()
+                                agregar_otro=input("\nDesea agregar a otro vicitante (s/n): ").lower()
                                 if agregar_otro != "s":
                                     break
                                        
-                        visita = Visita(id=id, guia=guia_seleccionado, visitantes=Visita.visitantes)
+                        visita = Visita(id=id, guia=guia_seleccionado, visitantes=visitantes_seleccionados)
                         self.zoo.registrar_visita(visita = visita)
-                        print(f"Visita registrada con exito. ID: {id}")
+                        print(f"\nVisita registrada con exito. ID: {id}")
                         
                     elif opcion_registro == 5:
                         break
