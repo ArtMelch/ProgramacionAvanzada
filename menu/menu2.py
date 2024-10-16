@@ -418,7 +418,7 @@ class Menu:
                     while not empleado_seleccionado:
                         for empleado in Zoologico.lista_empleados:
                             if empleado.rol == Rol.MANTENIMIENTO:
-                                print(f"ID: {empleado.id}, Nombre: {empleado.nombre} {empleado.apellidos}")
+                                print(f"ID: {empleado.id}\n Nombre: {empleado.nombre} {empleado.apellidos}\n")
                         
                         seleccion_empleado = input("Selecciona el empleado por ID: ")
                         
@@ -429,7 +429,9 @@ class Menu:
                         if not empleado_seleccionado:
                             print("ID de empleado no válido o el empleado no tiene rol de Mantenimiento. Intenta nuevamente.")
                             
-                    id_animal = input("Ingresa el ID del animal: ")
+                    for animal in Zoologico.lista_animales:
+                        print(f"ID: {animal.id}\n Tipo de animal: {animal.tipo_animal}\n Enfermedades: {animal.enfermedades}\n")
+                        id_animal = input("Ingresa el ID del animal: ")
                     
                     # Solicitar tipo de proceso
                     print("\nSelecciona el tipo de proceso:")
