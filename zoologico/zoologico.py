@@ -18,6 +18,7 @@ class Zoologico:
     lista_visitantes: List [Visitante] = []
     lista_animales: List [Animal] = []
     lista_visitas: List [Visita] = []
+    procesos_realizados= []
     
     
     def __init__(self):

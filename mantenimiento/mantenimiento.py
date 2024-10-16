@@ -1,6 +1,7 @@
 from empleados.utils.roles import Rol
 from empleados.empleado import Empleado
 from datetime import datetime
+from zoologico.zoologico import Zoologico
 
 class Mantenimiento(Empleado):
     pass
@@ -19,5 +20,20 @@ class Mantenimiento(Empleado):
                          horario=horario,
                          rol=Rol.MANTENIMIENTO)
         
-    def cuidado_animales(self):
-        pass
+    def cuidado_animales(self, id_animal: str, proceso: str, observaciones: str = ""):
+        # Registro de la fecha actual
+        fecha_proceso = datetime.now()
+        
+        # Crear un registro del proceso realizado
+        registro_proceso = {
+            'empleado': f"{self.nombre} {self.apellidos}",
+            'id_animal': id_animal,
+            'proceso': proceso,
+            'fecha': fecha_proceso.strftime("%Y-%m-%d"),
+            'observaciones': observaciones
+        }
+        
+        # esta es una lista para guardar los procesos que se haran
+        Zoologico.procesos_realizados.append(registro_proceso)
+
+        print(f"Proceso de {proceso} registrado para el animal {id_animal} por {self.nombre} {self.apellidos}.")
