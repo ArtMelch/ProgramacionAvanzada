@@ -51,14 +51,19 @@ class Zoologico:
         precio_niño = 50
         for visitante in visita.visitantes:
             visitante.numero_visitas += 1
-            if visitante.numero_visitas % 5 == 0:
+            if visitante.numero_visitas % 6 == 0:
                 print(f"Descuento del 20% para{visitante.nombre}")
-                precio_final = precio_adulto*.8 if visitante.es_adulto() else precio_niño *.8
+                
+                precio = precio_adulto*.8 if visitante.es_adulto() else precio_niño *.8
+                visitante.numero_visitas = 0
             else:
-                precio_final = precio_adulto if visitante.es_adulto() else precio_niño
-            print(f"visitante: {visitante.nombre}, precio boleto: ${precio_final}")
+                precio = precio_adulto if visitante.es_adulto() else precio_niño
+                
+            print(f"visitante: {visitante.nombre} \nPrecio boleto: ${precio}")
+            precio_final += precio
         self.lista_visitas.append(visita)
         print(f"visita registrada con ID: {visita.id}")
+        print(f"precio final: ${precio_final}")
         
     def registrar_animal(self, animal: Animal):
         self.lista_animales.append(animal)
