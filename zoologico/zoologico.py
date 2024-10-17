@@ -80,10 +80,11 @@ class Zoologico:
         self.lista_visitantes.append(visitante)
         
     def registrar_visita(self, visita: Visita):
+        precio_final = 0
         precio_adulto = 100
         precio_niño = 50
         for visitante in visita.visitantes:
-            visitante.numero_visitas += 1
+            visitante.numero_visitas =+ 1
             if visitante.numero_visitas % 6 == 0:
                 print(f"Descuento del 20% para {visitante.nombre}")
                 
@@ -93,7 +94,7 @@ class Zoologico:
                 precio = precio_adulto if visitante.es_adulto() else precio_niño
                 
             print(f"Visitante: {visitante.nombre} \nPrecio boleto: ${precio}")
-            precio_final += precio
+            precio_final = precio_final + precio
         self.lista_visitas.append(visita)
         print(f"Visita registrada con ID: {visita.id}")
         print(f"Precio final: ${precio_final}")
