@@ -171,12 +171,12 @@ class Menu:
                             if not guia_seleccionado:
                                 print("ID de guia no valido, intenta nuevamente.")
                                     
-                        visitantes_seleccionados = Visita.visitantes
+                        visitantes_seleccionados = []
                         
                         while True:
                             print("\nLista de visitantes registrados: ")
                             for visitante in Zoologico.lista_visitantes:
-                                if visitante not in Visita.visitantes:
+                                if visitante not in visitantes_seleccionados:
                                     print(f"\nID: {visitante.id_visitante} \nNombre: {visitante.nombre} {visitante.apellidos}")
                                 
                             seleccion = input("\nSelecciona el visitante por ID: ")

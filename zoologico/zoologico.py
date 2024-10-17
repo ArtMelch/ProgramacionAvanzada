@@ -45,9 +45,9 @@ class Zoologico:
         Zoologico.lista_animales.append(animal3)
         
         visitante1 = Visitante(id_visitante="VISITANTE6458768312", nombre="joshua", apellidos="perez", fecha_nacimiento=date(2018,6,15), curp="sfdghf", fecha_registro=date(2024,5,5), numero_visitas=0)
-        visitante2 = Visitante(id_visitante="VISITANTE643435312", nombre="rodrigo", apellidos="mendez", fecha_nacimiento=date(2019,6,15), curp="sfdghf", fecha_registro=date(2024,5,5), numero_visitas=0)
+        visitante2 = Visitante(id_visitante="VISITANTE643435312", nombre="rodrigo", apellidos="mendez", fecha_nacimiento=date(2000,6,15), curp="sfdghf", fecha_registro=date(2024,5,5), numero_visitas=0)
         visitante3 = Visitante(id_visitante="VISITANTE64576312", nombre="juan", apellidos="persfadz", fecha_nacimiento=date(2014,6,15), curp="sfdghf", fecha_registro=date(2024,5,5), numero_visitas=0)
-        visitante4 = Visitante(id_visitante="VISITANTE645326412", nombre="oscar", apellidos="peresfdz", fecha_nacimiento=date(2010,6,15), curp="sfdghf", fecha_registro=date(2024,5,5), numero_visitas=0)
+        visitante4 = Visitante(id_visitante="VISITANTE645326412", nombre="oscar", apellidos="peresfdz", fecha_nacimiento=date(2004,6,15), curp="sfdghf", fecha_registro=date(2024,5,5), numero_visitas=0)
         # self.lista_visitantes.append(visitante1)
         # self.lista_visitantes.append(visitante2)
         # self.lista_visitantes.append(visitante3)
@@ -82,6 +82,7 @@ class Zoologico:
     def registrar_visita(self, visita: Visita):
         precio_adulto = 100
         precio_niño = 50
+        precio_final = 0
         for visitante in visita.visitantes:
             visitante.numero_visitas += 1
             if visitante.numero_visitas % 6 == 0:
