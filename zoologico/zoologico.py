@@ -85,18 +85,18 @@ class Zoologico:
         for visitante in visita.visitantes:
             visitante.numero_visitas += 1
             if visitante.numero_visitas % 6 == 0:
-                print(f"Descuento del 20% para{visitante.nombre}")
+                print(f"Descuento del 20% para {visitante.nombre}")
                 
                 precio = precio_adulto*.8 if visitante.es_adulto() else precio_niño *.8
                 visitante.numero_visitas = 0
             else:
                 precio = precio_adulto if visitante.es_adulto() else precio_niño
                 
-            print(f"visitante: {visitante.nombre} \nPrecio boleto: ${precio}")
+            print(f"Visitante: {visitante.nombre} \nPrecio boleto: ${precio}")
             precio_final += precio
         self.lista_visitas.append(visita)
-        print(f"visita registrada con ID: {visita.id}")
-        print(f"precio final: ${precio_final}")
+        print(f"Visita registrada con ID: {visita.id}")
+        print(f"Precio final: ${precio_final}")
         
     def registrar_animal(self, animal: Animal):
         self.lista_animales.append(animal)
@@ -232,7 +232,7 @@ class Zoologico:
             print(empleado.mostrar_info_empl())
             
     def listar_administrativos(self):
-        print("\n--------------VETERINARIOS-------------\n")
+        print("\n--------------ADMINISTRATIVOS-------------\n")
         for empleado in self.lista_administrativo:
             print(empleado.mostrar_info_empl())
             
