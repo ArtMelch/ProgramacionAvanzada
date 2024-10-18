@@ -431,8 +431,9 @@ class Menu:
                             
                     print("\nLista de animales: \n")
                     for animal in Zoologico.lista_animales:
-                        print(f"ID: {animal.id}\nTipo de animal: {animal.tipo_animal}\nEnfermedades: {animal.enfermedades}\n")
-                        id_animal = input("Ingresa el ID del animal: ")
+                        print(f"ID: {animal.id}\nTipo de animal: {animal.tipo_animal.value}\nEnfermedades: {animal.enfermedades}\n")
+                        
+                    id_animal = input("Ingresa el ID del animal: ")
                     
                     # Solicitar tipo de proceso
                     print("\nSelecciona el tipo de proceso:")

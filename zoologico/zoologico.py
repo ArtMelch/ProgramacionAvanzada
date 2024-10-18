@@ -28,7 +28,7 @@ class Zoologico:
         self.lista_empleados.append(director) 
         #ELIMINAR
         guia1 = Empleado(id="GI123345", nombre="Arturo", apellidos="Melchor", fecha_nacimiento=date(2000,8,9,), fecha_ingreso=date(2020,9,9), rfc="dsfsg", curp="fdsagns", salario=978465132, horario=8, rol=Rol.GUIA)
-        guia2 = Empleado(id="GI123345", nombre="Arturoo", apellidos="Melchoor", fecha_nacimiento=date(2001,8,9,), fecha_ingreso=date(2020,9,9), rfc="dsfsfadsg", curp="fdsagnadsgs", salario=97846598652, horario=8, rol=Rol.GUIA)
+        guia2 = Empleado(id="GI123375", nombre="Arturoo", apellidos="Melchoor", fecha_nacimiento=date(2001,8,9,), fecha_ingreso=date(2020,9,9), rfc="dsfsfadsg", curp="fdsagnadsgs", salario=97846598652, horario=8, rol=Rol.GUIA)
         self.lista_empleados.append(guia1) 
         self.lista_empleados.append(guia2) 
         Zoologico.lista_guia.append(guia1)
