@@ -185,7 +185,7 @@ class Menu:
                                 if seleccion == visitante.id_visitante:
                                     visitante_seleccionado = visitante
                                 
-                                    if visitante_seleccionado == visitantes_seleccionados:
+                                    if visitante_seleccionado in visitantes_seleccionados:
                                         print("\n\tNo se puede registrar dos veces al mismo visitante")
                                         
                                     else:
