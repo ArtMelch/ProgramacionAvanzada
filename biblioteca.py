@@ -4,7 +4,7 @@ import mysql.connector
 from usuarios.usuarios import Usuarios
 from usuarios.utils.rol import Rol
 
-global usuario
+
 
 def login():
     usuario = user_entry.get()
@@ -13,21 +13,27 @@ def login():
     try:
         conn = mysql.connector.connect(host='localhost', user='root', password='',  database='biblioteca')
         cursor = conn.connect()
-        cursor.execute("SELECT * FROM usuarios WHERE usuario= %s AND contraseña = %s", (usuario,contrasena))
+        cursor = conn.cursor()   
+        cursor.execute('''
+            SELECT * FROM usuarios WHERE usuario = %s AND contraseña = %s  ''', (usuario, contrasena))
+ 
         usuario = cursor.fetchone()
         
         if usuario:
-            messagebox.showinfo("Login exitoso", f"Bienvenido {usuario[4]}.")
+            messagebox.showinfo("Login exitoso", f"Bienvenido {usuario[3]}.")
+            admin(usuario=usuario)
         else:
             messagebox.showerror("Error", "Usuario o contraseña no encontrados.")
     
     except mysql.connector.Error as err:
         messagebox.showerror("Error de conexión", f"Error: {err}")
     
-    
+    finally:
+        if conn.is_connected():
+            conn.close()
     
 def admin(usuario):
-    if usuario.rol == Rol.ADMINISTRADOR:
+    if usuario == Rol.ADMINISTRADOR:
         vent_admin = tk.Toplevel(vent_principal)
         vent_admin.title("Administrador")
         vent_admin.geometry("300x300")
@@ -35,6 +41,7 @@ def admin(usuario):
 vent_principal = tk.Tk()
 vent_principal.title("Sistema de gestión")
 vent_principal.geometry("300x300")
+
 
 label1 = tk.Label(vent_principal,text="Inicio de sesión")
 label1.place(x=100, y=10)
