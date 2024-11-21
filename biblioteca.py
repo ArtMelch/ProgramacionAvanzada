@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 import mysql.connector
 from usuarios.usuarios import Usuarios
-from usuarios.utils.rol import Rol
 
 
 
@@ -21,7 +20,8 @@ def login():
         
         if usuario:
             messagebox.showinfo("Login exitoso", f"Bienvenido {usuario[3]}.")
-            admin(usuario=usuario)
+            validacion(usuario=usuario)
+            
         else:
             messagebox.showerror("Error", "Usuario o contraseña no encontrados.")
     
@@ -32,11 +32,16 @@ def login():
         if conn.is_connected():
             conn.close()
     
-def admin(usuario):
-    if usuario == Rol.ADMINISTRADOR:
+def validacion(usuario):
+    if usuario[5] == "Administrador":
         vent_admin = tk.Toplevel(vent_principal)
         vent_admin.title("Administrador")
         vent_admin.geometry("300x300")
+        
+    elif usuario[5] == "Empleado":
+        vent_empleado = tk.Toplevel(vent_principal)
+        vent_empleado.title("Empleado")
+        vent_empleado.geometry("300x300")
 
 vent_principal = tk.Tk()
 vent_principal.title("Sistema de gestión")
