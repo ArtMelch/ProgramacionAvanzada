@@ -33,7 +33,7 @@ def login():
             conn.close()
     
 def admin(usuario):
-    if usuario == Rol.ADMINISTRADOR:
+    if usuario: #== Rol.ADMINISTRADOR:
         vent_admin = tk.Toplevel(vent_principal)
         vent_admin.title("Administrador")
         vent_admin.geometry("300x300")
