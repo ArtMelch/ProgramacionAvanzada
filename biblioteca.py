@@ -5,30 +5,77 @@ import mysql.connector
 from usuarios.usuarios import Usuarios
 from tkinter import *
 
-global nombre
-global apellido
-global password
-global usuario
-global identificador
-
 def reg_emple():
+    global nombre, apellido, password, usuario, identificador, rol
+    root = tk.Tk()
+    root.geometry("600x400")
     
-    nombreoAdd= nombre.get()
-    apelliAdd= apellido.get()
-    usuarioAdd= usuario.get()
+    label1 = tk.Label(root,text="Registro de Empleados", fg="red",font=("Arial",28)).place(x=170,y=0)
+    
+    
+    labelid = tk.Label(root, text="ID", font=("Arial", 12))
+    labelid.place(x=100, y=50)
+    
+    labelnombre = tk.Label(root, text="Nombre", font=("Arial", 12))
+    labelnombre.place(x=100, y=80)
+    
+    labelapellido = tk.Label(root, text="Apellido", font=("Arial", 12))
+    labelapellido.place(x=100, y=110)
+    
+    labelusuario = tk.Label(root, text="Usuario", font=("Arial", 12))
+    labelusuario.place(x=100, y=140)
+    
+    labelcontrasena = tk.Label(root, text="Contraseña", font=("Arial", 12))
+    labelcontrasena.place(x=100, y=170)
+    
+    labelrol = tk.Label(root, text="Rol", font=("Arial", 12))
+    labelrol.place(x=100, y=200)
+    
+    identificador = tk.Entry(root)
+    identificador.place(x=270, y=50)
+    
+    nombre = tk.Entry(root)
+    nombre.place(x=270, y=80)
+    
+    apellido = tk.Entry(root)
+    apellido.place(x=270, y=110)
+    
+    usuario = tk.Entry(root)
+    usuario.place(x=270, y=140)
+    
+    password = tk.Entry(root)
+    password.place(x=270, y=170)
+    
+    rol = StringVar()
+    tk.Radiobutton(root, text="Administrador", variable=rol, value="Administrador").place(x=260, y=200)
+    tk.Radiobutton(root, text="Empleado", variable=rol, value="Empleado").place(x=400, y=200)
+    tk.Button(root,text="Crear",command=add, height=5, width=10, font=("Arial",12)).place(x=100,y=230)
+    
+    
+
+def add():
+    
+    global nombre, apellido, password, usuario, identificador, rol
+    
+    nombreAdd= nombre.get()
+    apellidoAdd= apellido.get()
+    userAdd= usuario.get()
     contraAdd= password.get()
     idAdd= identificador.get()
+    rolAdd= rol.get()
+    
+
     mysqlC =mysql.connector.connect(host='localhost',user='root',password='',database='biblioteca')
     micursor = mysqlC.cursor()
 
     try:
-        micursor.execute(f"insert into usuarios(ID,Nombre,Apellido,Usuario,Contraseña) values('{idAdd}','{nombreoAdd}','{apelliAdd}','{usuarioAdd}','{contraAdd}')")
+        micursor.execute(f"insert into usuarios(ID,Nombre,Apellido,Usuario,Contraseña,Rol) values('{idAdd}','{nombreAdd}','{apellidoAdd}','{userAdd}','{contraAdd}','{rolAdd}')")
         mysqlC.commit()
         nombre.delete(0,END)
         apellido.delete(0,END)
-        usuario.delete(0,END)
         password.delete(0,END)
         identificador.delete(0,END)
+        usuario.delete(0,END)
         
         messagebox.showinfo("Información","Usuario agregado")
         
@@ -37,8 +84,6 @@ def reg_emple():
         print(e)
         mysqlC.rollback()
         mysqlC.close()
-        
-    
 
 def login():
     usuario = user_entry.get()
