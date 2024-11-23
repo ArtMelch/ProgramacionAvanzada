@@ -1,89 +1,82 @@
 import tkinter as tk
 from tkinter import ttk,messagebox
 import mysql.connector
-import mysql.connector
 from usuarios.usuarios import Usuarios
 from tkinter import *
 
+
 def reg_emple():
-    global nombre, apellido, password, usuario, identificador, rol
+    global nombre, apellido, contraseña, usuario, identificador
+    
     root = tk.Tk()
+    root.title("Registro de Empleados")
     root.geometry("600x400")
     
-    label1 = tk.Label(root,text="Registro de Empleados", fg="red",font=("Arial",28)).place(x=170,y=0)
+    tk.Label(root, text="Registro de Empleados", fg="red", font=("Arial", 28)).pack(pady=10)
     
+    etiquetas = ["ID", "Nombre", "Apellido", "Usuario", "Contraseña"]
+    y_positions = [50, 80, 110, 140, 170]
     
-    labelid = tk.Label(root, text="ID", font=("Arial", 12))
-    labelid.place(x=100, y=50)
-    
-    labelnombre = tk.Label(root, text="Nombre", font=("Arial", 12))
-    labelnombre.place(x=100, y=80)
-    
-    labelapellido = tk.Label(root, text="Apellido", font=("Arial", 12))
-    labelapellido.place(x=100, y=110)
-    
-    labelusuario = tk.Label(root, text="Usuario", font=("Arial", 12))
-    labelusuario.place(x=100, y=140)
-    
-    labelcontrasena = tk.Label(root, text="Contraseña", font=("Arial", 12))
-    labelcontrasena.place(x=100, y=170)
-    
-    labelrol = tk.Label(root, text="Rol", font=("Arial", 12))
-    labelrol.place(x=100, y=200)
+    for etiqueta, y in zip(etiquetas, y_positions):
+        tk.Label(root, text=etiqueta, font=("Arial", 12)).place(x=100, y=y)
     
     identificador = tk.Entry(root)
     identificador.place(x=270, y=50)
-    
     nombre = tk.Entry(root)
     nombre.place(x=270, y=80)
-    
     apellido = tk.Entry(root)
     apellido.place(x=270, y=110)
-    
     usuario = tk.Entry(root)
     usuario.place(x=270, y=140)
-    
-    password = tk.Entry(root)
-    password.place(x=270, y=170)
-    
-    rol = StringVar()
-    tk.Radiobutton(root, text="Administrador", variable=rol, value="Administrador").place(x=260, y=200)
-    tk.Radiobutton(root, text="Empleado", variable=rol, value="Empleado").place(x=400, y=200)
-    tk.Button(root,text="Crear",command=add, height=5, width=10, font=("Arial",12)).place(x=100,y=230)
+    contraseña = tk.Entry(root, show="*")
+    contraseña.place(x=270, y=170)
     
     
+    tk.Button(root, text="Registrar como Administrador", command=lambda: add("Administrador"), height=2, width=25, font=("Arial", 12)).place(x=170, y=220)
+    tk.Button(root, text="Registrar como Empleado", command=lambda: add("Empleado"), height=2, width=25, font=("Arial", 12)).place(x=170, y=270)
+    
+    root.mainloop()
 
-def add():
-    
-    global nombre, apellido, password, usuario, identificador, rol
-    
-    nombreAdd= nombre.get()
-    apellidoAdd= apellido.get()
-    userAdd= usuario.get()
-    contraAdd= password.get()
-    idAdd= identificador.get()
-    rolAdd= rol.get()
-    
+def add(rol):
+    idAdd = identificador.get().strip()
+    nombreAdd = nombre.get().strip()
+    apellidoAdd = apellido.get().strip()
+    userAdd = usuario.get().strip()
+    contraAdd = contraseña.get().strip()
 
-    mysqlC =mysql.connector.connect(host='localhost',user='root',password='',database='biblioteca')
-    micursor = mysqlC.cursor()
+    if not (idAdd and nombreAdd and apellidoAdd and userAdd and contraAdd):
+        messagebox.showerror("Error", "Todos los campos deben estar llenos")
+        return
 
     try:
-        micursor.execute(f"insert into usuarios(ID,Nombre,Apellido,Usuario,Contraseña,Rol) values('{idAdd}','{nombreAdd}','{apellidoAdd}','{userAdd}','{contraAdd}','{rolAdd}')")
-        mysqlC.commit()
-        nombre.delete(0,END)
-        apellido.delete(0,END)
-        password.delete(0,END)
-        identificador.delete(0,END)
-        usuario.delete(0,END)
-        
-        messagebox.showinfo("Información","Usuario agregado")
-        
-        
-    except Exception as e:
-        print(e)
-        mysqlC.rollback()
-        mysqlC.close()
+        mysql_c = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='',
+            database='biblioteca'
+        )
+        micursor = mysql_c.cursor()
+
+        consulta = """INSERT INTO usuarios (ID, Nombre, Apellido, Usuario, Contraseña, Rol) VALUES (%s, %s, %s, %s, %s, %s)"""
+        valores = (idAdd, nombreAdd, apellidoAdd, userAdd, contraAdd, rol)
+
+        micursor.execute(consulta, valores)
+        mysql_c.commit()
+
+        identificador.delete(0, tk.END)
+        nombre.delete(0, tk.END)
+        apellido.delete(0, tk.END)
+        usuario.delete(0, tk.END)
+        contraseña.delete(0, tk.END)
+
+        messagebox.showinfo("Información", f"Usuario registrado como {rol} correctamente")
+
+    except mysql.connector.Error as err:
+        messagebox.showerror("Error", f"No se pudo agregar el usuario: {err}")
+
+    finally:
+        if 'mysql_c' in locals() and mysql_c.is_connected():
+            mysql_c.close()
 
 def login():
     usuario = user_entry.get()
