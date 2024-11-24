@@ -1,82 +1,8 @@
 import tkinter as tk
 from tkinter import ttk,messagebox
 import mysql.connector
-from usuarios.usuarios import Usuarios
 from tkinter import *
 
-
-def reg_emple():
-    global nombre, apellido, contraseña, usuario, identificador
-    
-    root = tk.Tk()
-    root.title("Registro de Empleados")
-    root.geometry("600x400")
-    
-    tk.Label(root, text="Registro de Empleados", fg="red", font=("Arial", 28)).pack(pady=10)
-    
-    etiquetas = ["ID", "Nombre", "Apellido", "Usuario", "Contraseña"]
-    y_positions = [50, 80, 110, 140, 170]
-    
-    for etiqueta, y in zip(etiquetas, y_positions):
-        tk.Label(root, text=etiqueta, font=("Arial", 12)).place(x=100, y=y)
-    
-    identificador = tk.Entry(root)
-    identificador.place(x=270, y=50)
-    nombre = tk.Entry(root)
-    nombre.place(x=270, y=80)
-    apellido = tk.Entry(root)
-    apellido.place(x=270, y=110)
-    usuario = tk.Entry(root)
-    usuario.place(x=270, y=140)
-    contraseña = tk.Entry(root, show="*")
-    contraseña.place(x=270, y=170)
-    
-    
-    tk.Button(root, text="Registrar como Administrador", command=lambda: add("Administrador"), height=2, width=25, font=("Arial", 12)).place(x=170, y=220)
-    tk.Button(root, text="Registrar como Empleado", command=lambda: add("Empleado"), height=2, width=25, font=("Arial", 12)).place(x=170, y=270)
-    
-    root.mainloop()
-
-def add(rol):
-    idAdd = identificador.get().strip()
-    nombreAdd = nombre.get().strip()
-    apellidoAdd = apellido.get().strip()
-    userAdd = usuario.get().strip()
-    contraAdd = contraseña.get().strip()
-
-    if not (idAdd and nombreAdd and apellidoAdd and userAdd and contraAdd):
-        messagebox.showerror("Error", "Todos los campos deben estar llenos")
-        return
-
-    try:
-        mysql_c = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            password='',
-            database='biblioteca'
-        )
-        micursor = mysql_c.cursor()
-
-        consulta = """INSERT INTO usuarios (ID, Nombre, Apellido, Usuario, Contraseña, Rol) VALUES (%s, %s, %s, %s, %s, %s)"""
-        valores = (idAdd, nombreAdd, apellidoAdd, userAdd, contraAdd, rol)
-
-        micursor.execute(consulta, valores)
-        mysql_c.commit()
-
-        identificador.delete(0, tk.END)
-        nombre.delete(0, tk.END)
-        apellido.delete(0, tk.END)
-        usuario.delete(0, tk.END)
-        contraseña.delete(0, tk.END)
-
-        messagebox.showinfo("Información", f"Usuario registrado como {rol} correctamente")
-
-    except mysql.connector.Error as err:
-        messagebox.showerror("Error", f"No se pudo agregar el usuario: {err}")
-
-    finally:
-        if 'mysql_c' in locals() and mysql_c.is_connected():
-            mysql_c.close()
 
 def login():
     usuario = user_entry.get()
@@ -306,8 +232,302 @@ def ventana_empleado():
     mostrar()
     listbox.bind("<Double-Button-1>",obtenerR)
     
-        
+ #! Ventana Admin       
 def ventana_admin():
+    def eliminar_empleado_ventana():
+        def cargar_empleados():
+            try:
+                mysql_c = mysql.connector.connect(
+                    host='localhost',
+                    user='root',
+                    password='',
+                    database='biblioteca'
+                )
+                micursor = mysql_c.cursor()
+                micursor.execute("SELECT ID, Nombre, Apellido, Usuario, Rol FROM usuarios")
+                rows = micursor.fetchall()
+
+                for item in tree.get_children():
+                    tree.delete(item)
+
+                for row in rows:
+                    tree.insert("", tk.END, values=row)
+
+            except mysql.connector.Error as err:
+                messagebox.showerror("Error", f"No se pudo cargar la lista de empleados: {err}")
+
+            finally:
+                if 'mysql_c' in locals() and mysql_c.is_connected():
+                    mysql_c.close()
+
+        def eliminar_empleado():
+            selected_item = tree.selection()
+
+            if not selected_item:
+                messagebox.showerror("Error", "Por favor, selecciona un empleado para eliminar")
+                return
+
+            item = tree.item(selected_item[0], "values")
+            idEliminar = item[0] 
+
+            confirmacion = messagebox.askyesno("Confirmación", f"¿Estás seguro de eliminar al empleado con ID {idEliminar}?")
+            if not confirmacion:
+                return
+
+            try:
+                mysql_c = mysql.connector.connect(
+                    host='localhost',
+                    user='root',
+                    password='',
+                    database='biblioteca'
+                )
+                micursor = mysql_c.cursor()
+
+                consulta = "DELETE FROM usuarios WHERE ID=%s"
+                micursor.execute(consulta, (idEliminar,))
+                mysql_c.commit()
+
+                messagebox.showinfo("Información", "Empleado eliminado correctamente")
+                cargar_empleados() 
+
+            except mysql.connector.Error as err:
+                messagebox.showerror("Error", f"No se pudo eliminar al empleado: {err}")
+
+            finally:
+                if 'mysql_c' in locals() and mysql_c.is_connected():
+                    mysql_c.close()
+
+        root = tk.Toplevel(vent_principal)
+        root.title("Eliminar Empleado")
+        root.geometry("800x400")
+
+        tk.Label(root, text="Eliminar Empleado", fg="red", font=("Arial", 28)).place(x=100, y=140)
+
+        columns = ("ID", "Nombre", "Apellido", "Usuario", "Rol")
+        tree = ttk.Treeview(root, columns=columns, show="headings", height=15)
+        tree.pack(fill=tk.BOTH, expand=True)
+
+        for col in columns:
+            tree.heading(col, text=col)
+            tree.column(col, width=150)
+
+        tk.Button(root, text="Eliminar Empleado", command=eliminar_empleado, height=2, width=20, font=("Arial", 12)).pack(pady=10)
+
+        cargar_empleados()
+    def cerrar_sesion():
+        vent_admin.destroy()
+        vent_principal.deiconify()
+        user_entry.delete(0, tk.END)
+        contra_entry.delete(0,tk.END)
+    def reg_emple():
+        global nombre, apellido, contraseña, usuario, identificador
+        
+        root = tk.Toplevel(vent_principal)
+        root.title("Registro de Empleados")
+        root.geometry("600x400")
+        
+        tk.Label(root, text="Registro de Empleados", fg="red", font=("Arial", 28)).pack(pady=10)
+        
+        etiquetas = ["ID", "Nombre", "Apellido", "Usuario", "Contraseña"]
+        y_positions = [50, 80, 110, 140, 170]
+        
+        for etiqueta, y in zip(etiquetas, y_positions):
+            tk.Label(root, text=etiqueta, font=("Arial", 12)).place(x=100, y=y)
+        
+        identificador = tk.Entry(root)
+        identificador.place(x=270, y=50)
+        nombre = tk.Entry(root)
+        nombre.place(x=270, y=80)
+        apellido = tk.Entry(root)
+        apellido.place(x=270, y=110)
+        usuario = tk.Entry(root)
+        usuario.place(x=270, y=140)
+        contraseña = tk.Entry(root, show="*")
+        contraseña.place(x=270, y=170)
+        
+        
+        tk.Button(root, text="Registrar como Administrador", command=lambda: add(root,"Administrador"), height=2, width=25, font=("Arial", 12)).place(x=170, y=220)
+        tk.Button(root, text="Registrar como Empleado", command=lambda: add(root, "Empleado"), height=2, width=25, font=("Arial", 12)).place(x=170, y=270)
+        
+        root.mainloop()
+
+    def add(root, rol):
+        idAdd = identificador.get().strip()
+        nombreAdd = nombre.get().strip()
+        apellidoAdd = apellido.get().strip()
+        userAdd = usuario.get().strip()
+        contraAdd = contraseña.get().strip()
+
+        if not (idAdd and nombreAdd and apellidoAdd and userAdd and contraAdd):
+            messagebox.showerror("Error", "Todos los campos deben estar llenos")
+            return
+
+        try:
+            mysql_c = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='',
+                database='biblioteca'
+            )
+            micursor = mysql_c.cursor()
+
+            consulta = """INSERT INTO usuarios (ID, Nombre, Apellido, Usuario, Contraseña, Rol) VALUES (%s, %s, %s, %s, %s, %s)"""
+            valores = (idAdd, nombreAdd, apellidoAdd, userAdd, contraAdd, rol)
+
+            micursor.execute(consulta, valores)
+            mysql_c.commit()
+
+            identificador.delete(0, tk.END)
+            nombre.delete(0, tk.END)
+            apellido.delete(0, tk.END)
+            usuario.delete(0, tk.END)
+            contraseña.delete(0, tk.END)
+
+            messagebox.showinfo("Información", f"Usuario registrado como {rol} correctamente")
+            
+            root.destroy()
+
+        except mysql.connector.Error as err:
+            messagebox.showerror("Error", f"No se pudo agregar el usuario: {err}")
+
+        finally:
+            if 'mysql_c' in locals() and mysql_c.is_connected():
+                mysql_c.close()
+
+    def editar_emple():
+        def cargar_empleados():
+            try:
+                mysql_c = mysql.connector.connect(
+                    host='localhost',
+                    user='root',
+                    password='',
+                    database='biblioteca'
+                )
+                micursor = mysql_c.cursor()
+                micursor.execute("SELECT ID, Nombre, Apellido, Usuario, Rol FROM usuarios")
+                rows = micursor.fetchall()
+
+                for item in tree.get_children():
+                    tree.delete(item)
+
+                for row in rows:
+                    tree.insert("", tk.END, values=row)
+
+            except mysql.connector.Error as err:
+                messagebox.showerror("Error", f"No se pudo cargar la lista de empleados: {err}")
+
+            finally:
+                if 'mysql_c' in locals() and mysql_c.is_connected():
+                    mysql_c.close()
+
+        def on_double_click(event):
+            item = tree.selection()[0] 
+            values = tree.item(item, "values") 
+
+            idEdit, nombreEdit,apellidoEdit, usuarioEdit, rolEdit = values
+
+            
+            editar_empleado_ventana(idEdit, nombreEdit,apellidoEdit, usuarioEdit, rolEdit)
+
+        def editar_empleado_ventana(idEdit, nombreEdit,apellidoEdit, usuarioEdit, rolEdit):
+            def actualizar_emple():
+                nombreNuevo = nombre.get().strip()
+                apellidoNuevo = apellido.get().strip()
+                usuarioNuevo = usuario.get().strip()
+                contraNuevo = contraseña.get().strip()
+                rolNuevo = rol_combobox.get().strip()
+
+                if not (nombreNuevo and apellidoNuevo and usuarioNuevo and rolNuevo):
+                    messagebox.showerror("Error", "Todos los campos (excepto Contraseña) deben estar llenos")
+                    return
+
+                try:
+                    mysql_c = mysql.connector.connect(
+                        host='localhost',
+                        user='root',
+                        password='',
+                        database='biblioteca'
+                    )
+                    micursor = mysql_c.cursor()
+
+                    if not contraNuevo:
+                        micursor.execute("SELECT Contraseña FROM usuarios WHERE ID=%s", (idEdit,))
+                        contraNuevo = micursor.fetchone()[0]
+
+                    consulta = """
+                    UPDATE usuarios 
+                    SET Nombre=%s, Apellido=%s, Usuario=%s, Contraseña=%s, Rol=%s
+                    WHERE ID=%s
+                    """
+                    valores = (nombreNuevo, apellidoNuevo, usuarioNuevo, contraNuevo, rolNuevo, idEdit)
+                    micursor.execute(consulta, valores)
+                    mysql_c.commit()
+
+                    messagebox.showinfo("Información", "Empleado actualizado correctamente")
+                    root.destroy()
+                    cargar_empleados()  
+
+                except mysql.connector.Error as err:
+                    messagebox.showerror("Error", f"No se pudo actualizar al empleado: {err}")
+
+                finally:
+                    if 'mysql_c' in locals() and mysql_c.is_connected():
+                        mysql_c.close()
+
+
+            root = tk.Toplevel(vent_principal)
+            root.title("Editar Empleado")
+            root.geometry("600x400")
+
+            tk.Label(root, text="Editar Información del Empleado", fg="red", font=("Arial", 28)).pack(pady=10)
+
+            etiquetas = ["Nombre", "Apellido", "Usuario", "Contraseña", "Rol"]
+            y_positions = [80, 110, 140, 170, 200]
+
+            global nombre, apellido, usuario, contraseña, rol_combobox
+
+            for etiqueta, y in zip(etiquetas, y_positions):
+                tk.Label(root, text=etiqueta, font=("Arial", 12)).place(x=100, y=y)
+
+            nombre = tk.Entry(root)
+            nombre.place(x=270, y=80)
+            nombre.insert(0, nombreEdit)
+
+            apellido = tk.Entry(root)
+            apellido.place(x=270, y=110)
+            apellido.insert(0, apellidoEdit)
+
+            usuario = tk.Entry(root)
+            usuario.place(x=270, y=140)
+            usuario.insert(0, usuarioEdit) 
+
+            contraseña = tk.Entry(root, show="*")
+            contraseña.place(x=270, y=170)
+
+            rol_combobox = ttk.Combobox(root, values=["Administrador", "Empleado"])
+            rol_combobox.place(x=270, y=200)
+            rol_combobox.set(rolEdit) 
+
+            tk.Button(root, text="Actualizar Empleado", command=actualizar_emple, height=2, width=25, font=("Arial", 12)).place(x=170, y=250)
+
+        root = tk.Toplevel(vent_principal)
+        root.title("Lista de Empleados")
+        root.geometry("800x400")
+
+        tk.Label(root, text="Lista de Empleados", fg="red", font=("Arial", 28)).pack(pady=10)
+
+        columns = ("ID", "Nombre", "Apellido", "Usuario", "Rol")
+        tree = ttk.Treeview(root, columns=columns, show="headings", height=15)
+        tree.pack(fill=tk.BOTH, expand=True)
+
+        for col in columns:
+            tree.heading(col, text=col)
+            tree.column(col, width=150)
+
+        cargar_empleados()
+
+        tree.bind("<Double-1>", on_double_click)
+    
     vent_principal.withdraw()
     
     vent_admin = tk.Toplevel(vent_principal)
@@ -318,7 +538,16 @@ def ventana_admin():
     label2.place(x=100, y=10)
 
     inicio_boton = tk.Button(vent_admin, text="Registrar Empleado",command=reg_emple)
-    inicio_boton.place(x=130,y=100)
+    inicio_boton.place(x=90,y=100)
+    
+    editar_boton = tk.Button(vent_admin, text="Editar Empleado", command=editar_emple)
+    editar_boton.place(x=90, y=130)
+    
+    cerrar_boton = tk.Button(vent_admin, text="Cerrar Sesion",command=cerrar_sesion)
+    cerrar_boton.place(x=90,y=190)
+    
+    eliminar_boton = tk.Button(vent_admin, text="Eliminar Empleado", command=eliminar_empleado_ventana)
+    eliminar_boton.place(x=90, y=160)
     
     
 #? VENTANA PRINCIPAL 
