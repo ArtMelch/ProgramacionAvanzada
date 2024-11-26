@@ -1,4 +1,5 @@
 import tkinter as tk
+from typing import List
 from tkinter import ttk,messagebox
 import mysql.connector
 from tkinter import *
@@ -38,12 +39,24 @@ def validacion(usuario):
     elif usuario[5] == "Empleado":
         ventana_empleado()
     
-def filtrar():
-    print("Se filtró")
-
 def ventana_empleado():
     vent_principal.withdraw()
-    
+        
+    def filtrar():
+        precioFil = filtrar_entry.get()
+        mysqlC = mysql.connector.connect(host = "localhost", user = "root", password= "", database= "biblioteca") 
+        micursor = mysqlC.cursor()
+        micursor.execute(f"SELECT * FROM libros WHERE precio= '{precioFil}'")
+        lista_filtrada = micursor.fetchall()
+        
+        for i in listbox.get_children():
+            listbox.delete(i)
+        
+        for i,(id,titulo,autor,edit,ano_publi, precio) in enumerate(lista_filtrada, start=0):
+            listbox.insert("","end",values=(id, titulo, autor, edit,ano_publi,precio))
+            mysqlC.close()
+                       
+        
     def cerrar_sesion():
         vent_empleado.destroy()
         vent_principal.deiconify()
@@ -88,7 +101,7 @@ def ventana_empleado():
             
         except Exception as e:
             print(e)
-            mysqlC.rollback() # Rolllback: Todo lo que ejecutaste regresalo, se hace todo o no se hace nada
+            mysqlC.rollback() # Rollback: Todo lo que ejecutaste regresalo, se hace todo o no se hace nada
             mysqlC.close() #Cierra la conexión con la base de datos
         actualizar()
         
@@ -187,7 +200,7 @@ def ventana_empleado():
     ano_publi_label.place(x=15,y=120)
     precio_label =tk.Label(vent_empleado, text="Precio:", font=("Arial",12))
     precio_label.place(x=15,y=140)
-    filtrar_label = tk.Label(vent_empleado, text="Filtrar por año de publicación", font=("Arial",13))
+    filtrar_label = tk.Label(vent_empleado, text="Filtrar precio", font=("Arial",13))
     filtrar_label.place(x=510, y=70)
 
     #?Entry
@@ -211,7 +224,8 @@ def ventana_empleado():
     tk.Button(vent_empleado,text="Editar",command=editar, height=5, width=10, font=("Arial",12)).place(x=200,y=170)
     tk.Button(vent_empleado,text="Eliminar",command=eliminar, height=5, width=10, font=("Arial",12)).place(x=350,y=170)
     tk.Button(vent_empleado,text="Buscar", command=filtrar, font=("Arial",11)).place(x=500,y=100)
-    tk.Button(vent_empleado,text="Cerrar sesión", command=cerrar_sesion, font=("Arial",13), fg="red").place(x=550,y=200)
+    tk.Button(vent_empleado,text="Cerrar sesión", command=cerrar_sesion, font=("Arial",13), fg="red").place(x=500,y=200)
+    tk.Button(vent_empleado,text="Cancelar filtro", command=actualizar, font=("Arial",13), fg="red").place(x=600,y=120)
     
     columnas = ("Id", "Título", "Autor", "Editorial","Año de publicación", "Precio")
     listbox = ttk.Treeview(vent_empleado, columns=columnas, show="headings")
