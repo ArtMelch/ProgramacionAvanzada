@@ -1,5 +1,4 @@
 import tkinter as tk
-from typing import List
 from tkinter import ttk,messagebox
 import mysql.connector
 from tkinter import *
@@ -177,6 +176,7 @@ def ventana_empleado():
     vent_empleado = tk.Toplevel(vent_principal)
     vent_empleado.title("Empleado")
     vent_empleado.geometry("820x500")
+    vent_empleado.configure(bg="navajo white")
     
     global id_entry
     global titulo_entry
@@ -186,22 +186,22 @@ def ventana_empleado():
     global precio_entry
     
     #?Labels
-    label2 = tk.Label(vent_empleado,text="Gestión de libros en el inventario",font=("Arial",14), fg="blue")
+    label2 = tk.Label(vent_empleado,text="Gestión de libros en el inventario",font=("Arial",14), fg="blue",bg="navajo white")
     label2.place(x=300,y=10)
-    id_label = tk.Label(vent_empleado,text="ID:", font=("Arial",12))
+    id_label = tk.Label(vent_empleado,text="ID:", font=("Arial",12),bg="navajo white")
     id_label.place(x=15,y=40)
-    titulo_label = tk.Label(vent_empleado, text="Titulo:", font=("Arial",12))
+    titulo_label = tk.Label(vent_empleado, text="Titulo:", font=("Arial",12),bg="navajo white")
     titulo_label.place(x=15,y=60)
-    autor_label = tk.Label(vent_empleado, text="Autor:", font=("Arial",12))
+    autor_label = tk.Label(vent_empleado, text="Autor:", font=("Arial",12),bg="navajo white")
     autor_label.place(x=15,y=80)
-    edit_label = tk.Label(vent_empleado, text="Editorial:", font=("Arial",12))
+    edit_label = tk.Label(vent_empleado, text="Editorial:", font=("Arial",12),bg="navajo white")
     edit_label.place(x=15,y=100)
-    ano_publi_label = tk.Label(vent_empleado, text="Año de publicación:", font=("Arial",12))
+    ano_publi_label = tk.Label(vent_empleado, text="Año de publicación:", font=("Arial",12),bg="navajo white")
     ano_publi_label.place(x=15,y=120)
-    precio_label =tk.Label(vent_empleado, text="Precio:", font=("Arial",12))
+    precio_label =tk.Label(vent_empleado, text="Precio:", font=("Arial",12),bg="navajo white")
     precio_label.place(x=15,y=140)
-    filtrar_label = tk.Label(vent_empleado, text="Filtrar precio", font=("Arial",13))
-    filtrar_label.place(x=510, y=70)
+    filtrar_label = tk.Label(vent_empleado, text="Filtrar Precio", font=("Arial",13),bg="navajo white")
+    filtrar_label.place(x=600, y=70)
 
     #?Entry
     id_entry = tk.Entry(vent_empleado)
@@ -220,12 +220,12 @@ def ventana_empleado():
     filtrar_entry.place(x=570,y=100)
     
     #? Buttons
-    tk.Button(vent_empleado,text="Agregar",command=agregar, height=5, width=10, font=("Arial",12)).place(x=50,y=170)
-    tk.Button(vent_empleado,text="Editar",command=editar, height=5, width=10, font=("Arial",12)).place(x=200,y=170)
-    tk.Button(vent_empleado,text="Eliminar",command=eliminar, height=5, width=10, font=("Arial",12)).place(x=350,y=170)
-    tk.Button(vent_empleado,text="Buscar", command=filtrar, font=("Arial",11)).place(x=500,y=100)
-    tk.Button(vent_empleado,text="Cerrar sesión", command=cerrar_sesion, font=("Arial",13), fg="red").place(x=500,y=200)
-    tk.Button(vent_empleado,text="Cancelar filtro", command=actualizar, font=("Arial",13), fg="red").place(x=600,y=120)
+    tk.Button(vent_empleado,text="Agregar",command=agregar, height=5, width=10, font=("Arial",12),bg="coral").place(x=50,y=170)
+    tk.Button(vent_empleado,text="Editar",command=editar, height=5, width=10, font=("Arial",12),bg="coral").place(x=200,y=170)
+    tk.Button(vent_empleado,text="Eliminar",command=eliminar, height=5, width=10, font=("Arial",12),bg="coral").place(x=350,y=170)
+    tk.Button(vent_empleado,text="Buscar", command=filtrar, font=("Arial",11),bg="coral").place(x=500,y=100)
+    tk.Button(vent_empleado,text="Cerrar sesión", command=cerrar_sesion, font=("Arial",13), fg="red",bg="light blue").place(x=500,y=200)
+    tk.Button(vent_empleado,text="Cancelar filtro", command=actualizar, font=("Arial",13), fg="red",bg="light blue").place(x=600,y=120)
     
     columnas = ("Id", "Título", "Autor", "Editorial","Año de publicación", "Precio")
     listbox = ttk.Treeview(vent_empleado, columns=columnas, show="headings")
@@ -314,8 +314,9 @@ def ventana_admin():
         root = tk.Toplevel(vent_principal)
         root.title("Eliminar Empleado")
         root.geometry("800x400")
+        root.configure(bg="navajo white")
 
-        tk.Label(root, text="Eliminar Empleado", fg="red", font=("Arial", 28)).place(x=100, y=140)
+        tk.Label(root, text="Eliminar Empleado", fg="red", font=("Arial", 28),bg="navajo white").place(x=100, y=140)
 
         columns = ("ID", "Nombre", "Apellido", "Usuario", "Rol")
         tree = ttk.Treeview(root, columns=columns, show="headings", height=15)
@@ -325,7 +326,7 @@ def ventana_admin():
             tree.heading(col, text=col)
             tree.column(col, width=150)
 
-        tk.Button(root, text="Eliminar Empleado", command=eliminar_empleado, height=2, width=20, font=("Arial", 12)).pack(pady=10)
+        tk.Button(root, text="Eliminar Empleado", command=eliminar_empleado, height=2, width=20, font=("Arial", 12),bg="coral").pack(pady=10)
 
         cargar_empleados()
     def cerrar_sesion():
@@ -339,14 +340,15 @@ def ventana_admin():
         root = tk.Toplevel(vent_principal)
         root.title("Registro de Empleados")
         root.geometry("600x400")
+        root.configure(bg="navajo white")
         
-        tk.Label(root, text="Registro de Empleados", fg="red", font=("Arial", 28)).pack(pady=10)
+        tk.Label(root, text="Registro de Empleados", fg="red", font=("Arial", 28), bg="navajo white").pack(pady=10)
         
         etiquetas = ["ID", "Nombre", "Apellido", "Usuario", "Contraseña"]
         y_positions = [50, 80, 110, 140, 170]
         
         for etiqueta, y in zip(etiquetas, y_positions):
-            tk.Label(root, text=etiqueta, font=("Arial", 12)).place(x=100, y=y)
+            tk.Label(root, text=etiqueta, font=("Arial", 12), bg="navajo white").place(x=100, y=y)
         
         identificador = tk.Entry(root)
         identificador.place(x=270, y=50)
@@ -360,8 +362,8 @@ def ventana_admin():
         contraseña.place(x=270, y=170)
         
         
-        tk.Button(root, text="Registrar como Administrador", command=lambda: add(root,"Administrador"), height=2, width=25, font=("Arial", 12)).place(x=170, y=220)
-        tk.Button(root, text="Registrar como Empleado", command=lambda: add(root, "Empleado"), height=2, width=25, font=("Arial", 12)).place(x=170, y=270)
+        tk.Button(root, text="Registrar como Administrador", command=lambda: add(root,"Administrador"), height=2, width=25, font=("Arial", 12), bg="coral").place(x=170, y=220)
+        tk.Button(root, text="Registrar como Empleado", command=lambda: add(root, "Empleado"), height=2, width=25, font=("Arial", 12), bg="coral").place(x=170, y=270)
         
         root.mainloop()
 
@@ -492,8 +494,9 @@ def ventana_admin():
             root = tk.Toplevel(vent_principal)
             root.title("Editar Empleado")
             root.geometry("600x400")
+            root.configure(bg="navajo white")
 
-            tk.Label(root, text="Editar Información del Empleado", fg="red", font=("Arial", 28)).pack(pady=10)
+            tk.Label(root, text="Editar Información del Empleado", fg="red", font=("Arial", 28), bg="navajo white").pack(pady=10)
 
             etiquetas = ["Nombre", "Apellido", "Usuario", "Contraseña", "Rol"]
             y_positions = [80, 110, 140, 170, 200]
@@ -522,13 +525,14 @@ def ventana_admin():
             rol_combobox.place(x=270, y=200)
             rol_combobox.set(rolEdit) 
 
-            tk.Button(root, text="Actualizar Empleado", command=actualizar_emple, height=2, width=25, font=("Arial", 12)).place(x=170, y=250)
+            tk.Button(root, text="Actualizar Empleado", command=actualizar_emple, height=2, width=25, font=("Arial", 12),bg="coral").place(x=170, y=250)
 
         root = tk.Toplevel(vent_principal)
         root.title("Lista de Empleados")
         root.geometry("800x400")
+        root.configure(bg="navajo white")
 
-        tk.Label(root, text="Lista de Empleados", fg="red", font=("Arial", 28)).pack(pady=10)
+        tk.Label(root, text="Lista de Empleados", fg="red", font=("Arial", 28),bg="navajo white").pack(pady=10)
 
         columns = ("ID", "Nombre", "Apellido", "Usuario", "Rol")
         tree = ttk.Treeview(root, columns=columns, show="headings", height=15)
@@ -547,20 +551,21 @@ def ventana_admin():
     vent_admin = tk.Toplevel(vent_principal)
     vent_admin.title("Administrador")
     vent_admin.geometry("300x300")
+    vent_admin.configure(bg="navajo white")
         
-    label2 = tk.Label(vent_admin,text="Buenos dias Administrador")
-    label2.place(x=100, y=10)
+    label2 = tk.Label(vent_admin,text="Buenos dias \n Administrador",bg="navajo white", font=("courier",15))
+    label2.place(x=60, y=10)
 
-    inicio_boton = tk.Button(vent_admin, text="Registrar Empleado",command=reg_emple)
+    inicio_boton = tk.Button(vent_admin, text="Registrar Empleado",command=reg_emple,bg="coral")
     inicio_boton.place(x=90,y=100)
     
-    editar_boton = tk.Button(vent_admin, text="Editar Empleado", command=editar_emple)
+    editar_boton = tk.Button(vent_admin, text="Editar Empleado", command=editar_emple,bg="coral")
     editar_boton.place(x=90, y=130)
     
-    cerrar_boton = tk.Button(vent_admin, text="Cerrar Sesion",command=cerrar_sesion)
+    cerrar_boton = tk.Button(vent_admin, text="Cerrar Sesion",command=cerrar_sesion,bg="light blue",fg="red")
     cerrar_boton.place(x=90,y=190)
     
-    eliminar_boton = tk.Button(vent_admin, text="Eliminar Empleado", command=eliminar_empleado_ventana)
+    eliminar_boton = tk.Button(vent_admin, text="Eliminar Empleado", command=eliminar_empleado_ventana,bg="coral")
     eliminar_boton.place(x=90, y=160)
     
     
@@ -568,21 +573,23 @@ def ventana_admin():
 vent_principal = tk.Tk()
 vent_principal.title("Sistema de gestión")
 vent_principal.geometry("300x300")
+vent_principal.attributes("-alpha",0.9)
+vent_principal.configure(bg="navajo white")
 
-label1 = tk.Label(vent_principal, text="Inicio de sesión")
+label1 = tk.Label(vent_principal, text="Inicio de sesión", font=("courier",9), bg="navajo white")
 label1.place(x=100, y=10)
 
-user_label = tk.Label(vent_principal, text="Usuario:")
+user_label = tk.Label(vent_principal, text="Usuario:",bg="navajo white")
 user_label.place(x=70, y=40)
 user_entry = tk.Entry(vent_principal)
 user_entry.place(x=120, y=40)
 
-contra_label = tk.Label(vent_principal, text="Contraseña:")
+contra_label = tk.Label(vent_principal, text="Contraseña:",bg="navajo white")
 contra_label.place(x=50, y=70)
 contra_entry = tk.Entry(vent_principal, show="*")
 contra_entry.place(x=120, y=70)
 
-inicio_boton = tk.Button(vent_principal, text="Iniciar sesión",command=login)
+inicio_boton = tk.Button(vent_principal, text="Iniciar sesión",command=login, bg="coral")
 inicio_boton.place(x=130,y=100)
 
 
